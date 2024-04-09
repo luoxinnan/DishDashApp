@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Backend.Models;
+using Backend.Services;
+
 
 public static class SeedData
 {

@@ -1,4 +1,7 @@
 
+
+
+using Backend.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +18,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
+builder.Services.AddScoped<DishService>();
+
 
 var app = builder.Build();
 using(var scope = app.Services.CreateScope()){
