@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Link, useHistory } from 'react-
 import AddIngredForm from './components/AddIngredForm';
 import IngredCards from './components/IngredCards';
 import AddDishForm from './components/AddDishForm';
+import { buttonVariants } from "@/components/ui/button"
 
 import AddDishDetailForm from './components/AddDishDetailForm';
 
@@ -100,9 +101,9 @@ export function App() {
         </Route>
 
         <Route exact path="/dishes">
-          <Link to="/dishes/add-dish"><button>Add</button></Link>
           <YesDishCards dishes={yesDishes} cookFunc={cookAndUpdate}/>
           <NoDishCards dishes = {NoDishes} cookFunc={cookAndUpdate} />
+          <Link to="/dishes/add-dish"><button className="btn btn-primary float-right mt-10 absolute bottom-0 right-0 mb-20 mr-10">+</button></Link>
         </Route>
 
 
@@ -112,8 +113,10 @@ export function App() {
 
 
       </Switch>
-      <Link to="/">Ingredients </Link>
-      <Link to="/dishes">Dishes</Link>
+      <div style={{display: 'flex', width: '80%', position: 'fixed', bottom: 0}}>
+        <Link to="/" className={buttonVariants({ variant: "outline" })}>Ingredients </Link>
+        <Link to="/dishes" className={buttonVariants({ variant: "outline" })}>Dishes</Link>
+      </div>
     </Router>
 
   )

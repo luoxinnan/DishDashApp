@@ -2,6 +2,8 @@
 import { BrowserRouter as Router, Route, Switch, Link, useHistory } from 'react-router-dom';
 import { FormEvent, useState } from "react";
 import { Ingred } from "@/App";
+import { Button, buttonVariants } from "@/components/ui/button"
+
 
 type Props = {
     func: (dishName: string, ingreds: Ingred[]) => void;
@@ -36,48 +38,47 @@ export default function AddDishDetailForm({func}: Props) {
         <div>
             <form className="max-w-sm mx-auto">
                 <div className="mb-5">
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dish name: </label>
-                    <input type="text" name="dishName" onChange = {event => changeDishName(event.target.value)}className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    <label>Dish name </label>
+                    <input type="text" name="dishName" placeholder="Type here"  onChange = {event => changeDishName(event.target.value)} className="input input-bordered w-full max-w-xs" />
                 </div>
-                <label>Ingredients: </label>
+                <label>Ingredients </label>
+                <button className='btn btn-primary btn-sm' type="button" onClick= {addIngredForm}> + </button>
                 <section className="ingred-form">
                     {
                         ingredForms.map((ingred, i) =>
-                            <>
-                                <div className="mb-5 ingred-form__name">
+                            <div className='add-ingred flex items-center mt-4 mb-4'>
+                                <div className="mb-1 ingred-form__name flex-grow w-80 mr-2">
                                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name: </label>
-                                    <input type="text" name="dish-ingredient-name" onChange={event => addNameToIngred(event.target.value, i)}className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                    <input type="text" name="dish-ingredient-name" onChange={event => addNameToIngred(event.target.value, i)}className="input input-bordered w-full max-w-xs" />
                                 </div>
-                                <div className="mb-5 ingred-form__quantity">
+                                <div className="mb-1 ingred-form__quantity">
                                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantity: </label>
-                                    <input type="text" name="dish-ingredient-quantity" onChange={event => addQuantityToIngred(event.target.value, i)}className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                    <input type="text" name="dish-ingredient-quantity" onChange={event => addQuantityToIngred(event.target.value, i)} className="input input-bordered w-full max-w-xs" />
                                 </div>
-                                
-                                
-                            </>
+                            </div>
 
                         )
 
                         
                     }
-                    <button onClick= {addIngredForm} type="button" className="ingred-form__add-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">+</button>
+                    
                 </section>
             </form>
-
-            <p>----------for testing----------</p>
-            <p>Dish: {dishName}</p>
-            {
-                ingredForms.map((ingred) => <p>{ingred.name}, {ingred.quantity}</p>)
-            }
-            <p>-------------------------------</p>
-
-
-
             <br />
 
-            <Link to="/dishes"><button>Cancel</button></Link>
-            <button type="submit" onClick={()=> func(dishName, ingredForms)}>Confirm</button>
+            <Link to="/dishes"><button className='btn btn-neutral btn-sm mr-2 w-20'>Cancel</button></Link>
+            {/* <button type="submit" onClick={()=> func(dishName, ingredForms)}>Confirm</button> */}
+            <button type="submit" onClick={()=> func(dishName, ingredForms)} className='btn btn-neutral btn-sm mr-2 w-20'> Confirm</button>
             <br />
+            
+            <div style={{fontSize: 10, color: 'gray'}}>
+                <p>----------for testing----------</p>
+                <p>Dish: {dishName}</p>
+                {
+                    ingredForms.map((ingred) => <p>{ingred.name}, {ingred.quantity}</p>)
+                }
+                <p>---------------------------------</p>
+            </div>
 
 
         </div>

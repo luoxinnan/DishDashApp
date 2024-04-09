@@ -5,6 +5,8 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
+
 
 
 export default function DishCard({ dish, func,i , canCook}: dishCardProps) {
@@ -16,7 +18,7 @@ export default function DishCard({ dish, func,i , canCook}: dishCardProps) {
                     <AccordionContent>{ingred.name}: {ingred.quantity}</AccordionContent>
                 ))}
                 {canCook ? (
-                    <AccordionContent><button onClick={() => func(i)}>Cook</button></AccordionContent>
+                    <AccordionContent><button onClick={() => func(i)} className="btn btn-xs btn-outline btn-primary">Cook</button></AccordionContent>
                 ) : null}
             </AccordionItem>
         </Accordion>

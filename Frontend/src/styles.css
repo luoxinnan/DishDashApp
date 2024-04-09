@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+
+body{
+    margin: 3rem;
+
+    font-family: "Tilt Neon", sans-serif;
+    color: rgb(27, 16, 53);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size:large;
+    font-variation-settings:
+      "XROT" 0,
+      "YROT" 0;
+}

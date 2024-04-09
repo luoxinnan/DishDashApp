@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Props } from "./types/IngredCardsTypes";
 import Counter from "./Counter";
+import "./styles/ingredCardsStyles.css"
 
 export default function IngredCards({ingreds }: Props){
     const [updatedIngreds, setUpdatedIngreds] = useState(ingreds);
@@ -14,17 +15,17 @@ export default function IngredCards({ingreds }: Props){
   
 
     return (
-        <div>
+        <section>
           {updatedIngreds.map((ingred, index) => (
-            <div key={index}>
-              <h2>{ingred.name}</h2>
+            <div className="ingred-container" key={index}>
+              <h2 className="ingred-name">{ingred.name}</h2>
               <Counter
                 value={ingred.quantity}
                 onChangeFunc={(newQuantity) => handleQuantityChange(index, newQuantity)}
               />
             </div>
           ))}
-        </div>
+        </section>
     );
     
 }

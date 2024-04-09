@@ -1,0 +1,9 @@
+.ingred-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .ingred-name {
+    flex-grow: 1;
+    width: 80%;
+  }
