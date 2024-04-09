@@ -14,7 +14,4 @@ public class DishIngredient{
     public int IngredientId {get; set;}
 
     public int Quantity {get; set;}
-
-    [Required]
-    public string Name {get; set;}
 }

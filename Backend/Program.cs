@@ -17,6 +17,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
 var app = builder.Build();
+using(var scope = app.Services.CreateScope()){
+    var services = scope.ServiceProvider;
+    SeedData.Initialize(services);
+}
+
 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 // Configure the HTTP request pipeline.
