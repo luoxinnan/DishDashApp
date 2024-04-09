@@ -5,21 +5,39 @@ import IngredCards from './components/IngredCards';
 import AddDishForm from './components/AddDishForm';
 import AddDishDetailForm from './components/AddDishDetailForm';
 
+import NoDishCards from './components/NoDishCards';
+import YesDishCards from './components/YesDishCards';
 
-// temp
+
+// --------temp------
 export type Ingred = {
   name: string,
   quantity: number
 }
 
+export type Dish = {
+  name: string;
+  ingreds: Ingred[];
+}
+const defaultIngreds = [
+  { name: "Tomato", quantity: 1 },
+  { name: "Egg", quantity: 4 },
+  { name: "Spring onion", quantity: 3 }
+];
+
+const d1 = {name: "Tomato fried egg", ingreds: defaultIngreds}
+const d2 = {name: "Egg soup", ingreds: [{name: "Egg", quantity: 1}]}
+const d3 = {name: "Steak", ingreds: [{name: "Beef", quantity: 1}]}
+const defaltYesDishes = [d1,d2];
+const defaltNoDishes = [d3];
+
+//-----------------
+
 export function App() {
 
-  const [ingreds, setIngreds] = useState([
-    { name: "Tomato", quantity: 1 },
-    { name: "Egg", quantity: 4 },
-    { name: "Spring onion", quantity: 3 }
-  ]);
-  const [tempdishName, setTempDishName] = useState<string>("");
+  const [ingreds, setIngreds] = useState(defaultIngreds);
+  const[yesDishes, setYesDishes] = useState<Dish[]>(defaltYesDishes);
+  const[NoDishes, setNoDishes] = useState<Dish[]>(defaltNoDishes);
 
 
 
@@ -58,12 +76,14 @@ export function App() {
         </Route>
 
         <Route exact path="/dishes">
-          <AddDishForm func={addDishToList} />
+          <Link to="/dishes/add-dish"><button>Add</button></Link>
+          <YesDishCards dishes={yesDishes}/>
+          <NoDishCards dishes = {NoDishes} />
         </Route>
 
 
         <Route exact path="/dishes/add-dish">
-          <AddDishDetailForm dishName={tempdishName} />
+          <AddDishDetailForm />
         </Route>
 
 
