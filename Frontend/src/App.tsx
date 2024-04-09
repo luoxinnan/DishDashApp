@@ -1,14 +1,24 @@
 import { FormEvent, useState } from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import AddIngredForm from './components/AddIngredForm';
+import IngredCards from './components/IngredCards';
 
 
-
+// temp
+export type Ingred = {
+  name: string,
+  quantity: number
+}
 
 
 export function App() {
 
-  const[ingredList, setIngredList] = useState();
+  const[ingreds, setIngreds] = useState([
+    {name: "Tomato", quantity: 1},
+    {name: "Egg", quantity: 4},
+    {name: "Spring onion", quantity: 3}
+  ]);
+  
 
   function addIngredToList(event: FormEvent<HTMLFormElement>){
     event?.preventDefault();
@@ -24,9 +34,13 @@ export function App() {
   }
 
 
+
+
   return (
     <>
     <AddIngredForm func={addIngredToList}/>
+    <IngredCards ingreds={ingreds}/>
+
 
     </>
   )
