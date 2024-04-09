@@ -8,6 +8,7 @@ export default function IngredCards({ingreds }: Props){
     function handleQuantityChange (index: number, newQuantity: number) {
       const newIngreds = [...updatedIngreds];
       newIngreds[index].quantity = newQuantity;
+      // TODO: send a http put request to change corespondent quantity
       setUpdatedIngreds(newIngreds);
     };
   

@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch,Link} from 'react-router-dom';
 import AddIngredForm from './components/AddIngredForm';
 import IngredCards from './components/IngredCards';
 
@@ -38,8 +38,20 @@ export function App() {
 
   return (
     <>
-    <AddIngredForm func={addIngredToList}/>
-    <IngredCards ingreds={ingreds}/>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <AddIngredForm func={addIngredToList}/>
+          <IngredCards ingreds={ingreds}/>
+        </Route>
+        <Route exact path="/dishes">
+            <h1>Hi</h1>
+        </Route>
+      </Switch>
+      <Link to="/">Ingredients </Link>
+      <Link to="/dishes">Dishes</Link>
+    </Router>
+    
 
 
     </>
