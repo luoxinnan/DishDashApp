@@ -1,10 +1,15 @@
 
 import { BrowserRouter as Router, Route, Switch, Link, useHistory } from 'react-router-dom';
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Ingred } from "@/App";
 
-export default function AddDishDetailForm() {
+type Props = {
+    func: (dishName: string, ingreds: Ingred[]) => void;
+}
+
+export default function AddDishDetailForm({func}: Props) {
     const [ingredForms, setIngredForms] = useState<Ingred[]>([])
+    const [dishName, setDishName] = useState<string>("");
 
     function addIngredForm(){
         const newIngredForms = [...ingredForms, {name: "", quantity: 0}]
@@ -23,12 +28,16 @@ export default function AddDishDetailForm() {
         setIngredForms(newIngredForms);
     }
 
+    function changeDishName(name: string){
+        setDishName(name);
+    }
+
     return (
         <div>
             <form className="max-w-sm mx-auto">
                 <div className="mb-5">
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dish name: </label>
-                    <input type="text" name="dishName" className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                    <input type="text" name="dishName" onChange = {event => changeDishName(event.target.value)}className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                 </div>
                 <label>Ingredients: </label>
                 <section className="ingred-form">
@@ -56,6 +65,7 @@ export default function AddDishDetailForm() {
             </form>
 
             <p>----------for testing----------</p>
+            <p>Dish: {dishName}</p>
             {
                 ingredForms.map((ingred) => <p>{ingred.name}, {ingred.quantity}</p>)
             }
@@ -66,7 +76,7 @@ export default function AddDishDetailForm() {
             <br />
 
             <Link to="/dishes"><button>Cancel</button></Link>
-            <button type="submit">Confirm</button>
+            <button type="submit" onClick={()=> func(dishName, ingredForms)}>Confirm</button>
             <br />
 
 

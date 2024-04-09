@@ -19,7 +19,7 @@ export type Dish = {
   name: string;
   ingreds: Ingred[];
 }
-const defaultIngreds = [
+const defaultIngreds: Ingred[] = [
   { name: "Tomato", quantity: 1 },
   { name: "Egg", quantity: 4 },
   { name: "Spring onion", quantity: 3 }
@@ -35,7 +35,7 @@ const defaltNoDishes = [d3];
 
 export function App() {
 
-  const [ingreds, setIngreds] = useState(defaultIngreds);
+  const [allIngreds, setAllIngreds] = useState<Ingred[]>(defaultIngreds);
   const[yesDishes, setYesDishes] = useState<Dish[]>(defaltYesDishes);
   const[NoDishes, setNoDishes] = useState<Dish[]>(defaltNoDishes);
 
@@ -54,11 +54,15 @@ export function App() {
     */
   }
 
-  function addDishToList(event: FormEvent<HTMLFormElement>) {
-    event?.preventDefault();
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    const name = formData.get('dish-name') as string;
+  function addDish(dishName: string, ingreds: Ingred[]) {
+    const dish: Dish = {name: dishName, ingreds: ingreds}
+    /*
+      1.send a http post request for adding a new dish
+      2. calculate if it is a yes dish or no dish, and update state accordingly
+    */
+   // for test:
+   const newNoDishes = [...NoDishes,dish];
+   setNoDishes(newNoDishes)
 
   }
 
@@ -72,7 +76,7 @@ export function App() {
 
         <Route exact path="/">
           <AddIngredForm func={addIngredToList} />
-          <IngredCards ingreds={ingreds} />
+          <IngredCards ingreds={allIngreds} />
         </Route>
 
         <Route exact path="/dishes">
@@ -83,7 +87,7 @@ export function App() {
 
 
         <Route exact path="/dishes/add-dish">
-          <AddDishDetailForm />
+          <AddDishDetailForm func={addDish}/>
         </Route>
 
 
