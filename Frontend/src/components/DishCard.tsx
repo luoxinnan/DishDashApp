@@ -1,4 +1,4 @@
-import { Dish } from "../App";
+import {Dish } from './appTypes';
 import {
     Accordion,
     AccordionContent,

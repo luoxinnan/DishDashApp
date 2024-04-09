@@ -1,9 +1,10 @@
-import { Props } from "./types/addIngredFormTypes";
+
 import { useForm, FieldValues } from "react-hook-form";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import "./styles/addIngredFormStyles.css"
 import { useState } from "react";
+
 
 export default function AddIngredForm({ func }: Props) {
     const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: { foodname: "" } });
@@ -40,4 +41,10 @@ export default function AddIngredForm({ func }: Props) {
             </form>
         </>
     )
+}
+
+
+
+export type Props = {
+    func : (value: FieldValues) => void;
 }

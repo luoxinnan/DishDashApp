@@ -1,6 +1,6 @@
 
 
-import { Dish } from "@/App";
+import { Dish } from './appTypes';
 import DishCard from "./DishCard"
 
 

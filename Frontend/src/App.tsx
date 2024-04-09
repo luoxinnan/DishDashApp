@@ -8,17 +8,10 @@ import AddDishDetailForm from './components/AddDishDetailForm';
 import NoDishCards from './components/NoDishCards';
 import YesDishCards from './components/YesDishCards';
 import { FieldValues } from 'react-hook-form';
+import { Dish, Ingred } from './components/appTypes';
 
 // --------temp------
-export type Ingred = {
-  name: string,
-  quantity: number
-}
 
-export type Dish = {
-  name: string;
-  ingreds: Ingred[];
-}
 const defaultIngreds: Ingred[] = [
   { name: "Tomato", quantity: 1 },
   { name: "Egg", quantity: 4 },

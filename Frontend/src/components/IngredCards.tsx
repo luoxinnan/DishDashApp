@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Props } from "./types/IngredCardsTypes";
 import Counter from "./Counter";
 import "./styles/ingredCardsStyles.css"
+import { Ingred } from './appTypes';
 
 export default function IngredCards({ingreds }: Props){
     const [updatedIngreds, setUpdatedIngreds] = useState(ingreds);
@@ -30,3 +30,10 @@ export default function IngredCards({ingreds }: Props){
     
 }
   
+
+
+
+
+type Props = {
+    ingreds: Ingred[]
+}

@@ -1,4 +1,4 @@
-import { CounterProps } from "./types/CounterTypes";
+
 import './styles/counterStyles.css'
 
 
@@ -35,4 +35,9 @@ export default function Counter({ onChangeFunc, value }: CounterProps) {
     </div>
 
   );
+}
+
+export type CounterProps = {
+  onChangeFunc: (newQuantity: number) => void,
+  value: number 
 }

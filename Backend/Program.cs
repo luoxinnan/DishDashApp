@@ -1,6 +1,7 @@
 
 
 
+using Backend.Models;
 using Backend.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 builder.Services.AddScoped<DishService>();
+builder.Services.AddScoped<IngredientService>();
 
 
 var app = builder.Build();

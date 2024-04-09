@@ -1,4 +1,5 @@
-import { Props } from "./types/addDishFormTypes";
+
+import { FormEvent } from "react";
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 export default function AddIngredForm({ func }: Props) {
@@ -12,4 +13,10 @@ export default function AddIngredForm({ func }: Props) {
             </form>
         </>
     )
+}
+
+
+
+export type Props = {
+    func : (event: FormEvent<HTMLFormElement>) => void;
 }
