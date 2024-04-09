@@ -1,14 +1,22 @@
 import { Dish } from "../App";
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
 
 
-export default function DishCard({dish}: dishCardProps){
+export default function DishCard({ dish }: dishCardProps) {
     return (
-        <>
-        <h3>{dish.name}</h3>
-        {dish.ingreds.map(ingred => (
-            <p>{ingred.name}: {ingred.quantity}</p>
-        ))}
-        </>
+        <Accordion type="single" collapsible>
+            <AccordionItem value="item-1">
+                <AccordionTrigger>{dish.name}</AccordionTrigger>
+                {dish.ingreds.map(ingred => (
+                    <AccordionContent>{ingred.name}: {ingred.quantity}</AccordionContent>
+                ))}
+            </AccordionItem>
+        </Accordion>
     )
 }
 
