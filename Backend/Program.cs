@@ -3,6 +3,7 @@
 
 using Backend.Models;
 using Backend.Services;
+using JokesAPI.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 builder.Services.AddScoped<DishService>();
 builder.Services.AddScoped<IngredientService>();
+builder.Services.AddAutoMapper(typeof(AutomapperConfig)); 
 
 
 var app = builder.Build();
