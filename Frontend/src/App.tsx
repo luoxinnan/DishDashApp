@@ -115,9 +115,24 @@ export function App() {
         
       </div>
       <div className="btm-nav">
-        <Link to="/" ><button><i className="fa-solid fa-carrot text-3xl" ></i></button> </Link>
-        <Link to="/dishes"><button className="active"><i className="fa-solid fa-utensils text-3xl"></i></button></Link>
-        <button><i className="fa-solid fa-gear text-3xl"></i></button>
+        <Link to="/" >
+          <button>
+            <i className="fa-solid fa-carrot text-2xl" ></i>
+          </button>
+          <span className='text-sm'>Ingredients</span>
+        </Link>
+        <Link to="/dishes">
+          <button className="active">
+            <i className="fa-solid fa-utensils text-2xl"></i>
+          </button>
+          <span className='text-sm'>Dishes</span>
+        </Link>
+        <div >
+          <button>
+            <i className="fa-solid fa-gear text-2xl"></i>
+          </button>
+          <span className='text-sm'>Settings</span>
+        </div>
 
         {/* <button onClick={() => setIsIngredpage(true)}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
