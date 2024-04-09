@@ -1,4 +1,5 @@
 import { CounterProps } from "./types/CounterTypes";
+import './styles/counterStyles.css'
 
 
 export default function Counter({ onChangeFunc, value }: CounterProps) {
@@ -13,7 +14,7 @@ export default function Counter({ onChangeFunc, value }: CounterProps) {
     };
   
     return (
-      <div>
+      <div  className="ingred-counter">
         <button onClick={handleDecrement}>-</button>
         <input type="text" value={value} readOnly />
         <button onClick={handleIncrement}>+</button>

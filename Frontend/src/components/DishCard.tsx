@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/accordion"
 
 
-export default function DishCard({ dish }: dishCardProps) {
+export default function DishCard({ dish, func,i , canCook}: dishCardProps) {
     return (
         <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
@@ -15,6 +15,9 @@ export default function DishCard({ dish }: dishCardProps) {
                 {dish.ingreds.map(ingred => (
                     <AccordionContent>{ingred.name}: {ingred.quantity}</AccordionContent>
                 ))}
+                {canCook ? (
+                    <AccordionContent><button onClick={() => func(i)}>Cook</button></AccordionContent>
+                ) : null}
             </AccordionItem>
         </Accordion>
     )
@@ -22,4 +25,7 @@ export default function DishCard({ dish }: dishCardProps) {
 
 type dishCardProps = {
     dish: Dish;
+    func: (i: number) => void;
+    i: number;
+    canCook: boolean;
 }

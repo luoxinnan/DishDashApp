@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Link, useHistory } from 'react-
 import AddIngredForm from './components/AddIngredForm';
 import IngredCards from './components/IngredCards';
 import AddDishForm from './components/AddDishForm';
+
 import AddDishDetailForm from './components/AddDishDetailForm';
 
 import NoDishCards from './components/NoDishCards';
@@ -25,7 +26,7 @@ const defaultIngreds: Ingred[] = [
   { name: "Spring onion", quantity: 3 }
 ];
 
-const d1 = {name: "Tomato fried egg", ingreds: defaultIngreds}
+const d1 = {name: "Tomato fried egg", ingreds: [{name: "Egg", quantity: 3}, {name:"Tomato", quantity:1}]}
 const d2 = {name: "Egg soup", ingreds: [{name: "Egg", quantity: 1}]}
 const d3 = {name: "Steak", ingreds: [{name: "Beef", quantity: 1}]}
 const defaltYesDishes = [d1,d2];
@@ -46,6 +47,10 @@ export function App() {
     const form = event.currentTarget;
     const formData = new FormData(form);
     const name = formData.get('ingred-name') as string;
+    const newIngred: Ingred = {name: name, quantity:0}
+    const newAllIngreds = [...allIngreds, newIngred]
+    setAllIngreds(newAllIngreds);
+    console.table(allIngreds);
 
     /* TODO:
       - Send post reequest (name and quantity 0)
@@ -60,9 +65,27 @@ export function App() {
       1.send a http post request for adding a new dish
       2. calculate if it is a yes dish or no dish, and update state accordingly
     */
-   // for test:
+   // --------for test--------
    const newNoDishes = [...NoDishes,dish];
    setNoDishes(newNoDishes)
+   //------------------------
+   alert("Successfully added!");
+   
+  }
+
+  function cookAndUpdate(i: number){
+    const dish = yesDishes[i];
+    const newAllIngreds = [...allIngreds];
+    dish.ingreds.forEach(dishIngred => {
+      const ingredIndex = newAllIngreds.findIndex(ing => ing.name == dishIngred.name);
+      if(ingredIndex != -1)
+        newAllIngreds[ingredIndex].quantity -= dishIngred.quantity;
+    });
+
+    setAllIngreds(newAllIngreds);
+    // TODO: patch request
+    // TODO: check if the dish is still a yes dish, move it accordingly, and rerender the page
+    alert("Have a nice meal!")
 
   }
 
@@ -81,8 +104,8 @@ export function App() {
 
         <Route exact path="/dishes">
           <Link to="/dishes/add-dish"><button>Add</button></Link>
-          <YesDishCards dishes={yesDishes}/>
-          <NoDishCards dishes = {NoDishes} />
+          <YesDishCards dishes={yesDishes} cookFunc={cookAndUpdate}/>
+          <NoDishCards dishes = {NoDishes} cookFunc={cookAndUpdate} />
         </Route>
 
 
