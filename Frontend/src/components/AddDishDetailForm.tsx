@@ -1,5 +1,5 @@
 import { Props } from "./types/addDishDetailFormTypes";
-import QuantitySpinner from "./QuantitySpinner"
+import Counter from "./Counter"
 import { BrowserRouter as Router, Route, Switch, Link, useHistory } from 'react-router-dom';
 
 export default function AddDishDetailForm({dishName}: Props){

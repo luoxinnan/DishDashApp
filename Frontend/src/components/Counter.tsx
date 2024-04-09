@@ -1,14 +1,14 @@
-import { quantitySpinnerProps } from "./types/quantitySpinnerTypes";
+import { CounterProps } from "./types/CounterTypes";
 
 
-export default function Spinner({ onChange, value }: quantitySpinnerProps) {
+export default function Counter({ onChangeFunc, value }: CounterProps) {
     const handleIncrement = () => {
-      onChange(value + 1);
+      onChangeFunc(value + 1);
     };
   
     const handleDecrement = () => {
       if (value > 0) {
-        onChange(value - 1);
+        onChangeFunc(value - 1);
       }
     };
   
