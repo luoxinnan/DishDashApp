@@ -67,7 +67,7 @@ export function App() {
    const newNoDishes = [...NoDishes,dish];
    setNoDishes(newNoDishes)
    //------------------------
-   alert("Successfully added!");
+   
    
   }
 
@@ -83,7 +83,6 @@ export function App() {
     setAllIngreds(newAllIngreds);
     // TODO: patch request
     // TODO: check if the dish is still a yes dish, move it accordingly, and rerender the page
-    alert("Have a nice meal!")
 
   }
 
