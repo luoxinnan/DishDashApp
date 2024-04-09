@@ -8,6 +8,7 @@ import AddDishDetailForm from './components/AddDishDetailForm';
 
 import NoDishCards from './components/NoDishCards';
 import YesDishCards from './components/YesDishCards';
+import { FieldValues } from 'react-hook-form';
 
 
 // --------temp------
@@ -42,12 +43,8 @@ export function App() {
 
 
 
-  function addIngredToList(event: FormEvent<HTMLFormElement>) {
-    event?.preventDefault();
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    const name = formData.get('ingred-name') as string;
-    const newIngred: Ingred = {name: name, quantity:0}
+  function addIngredToList(value: FieldValues) {
+    const newIngred: Ingred = {name: value.foodname, quantity:0}
     const newAllIngreds = [...allIngreds, newIngred]
     setAllIngreds(newAllIngreds);
     console.table(allIngreds);

@@ -1,5 +1,6 @@
 import { FormEvent } from "react";
+import { FieldValues } from "react-hook-form";
 
 export type Props = {
-    func : (event: FormEvent<HTMLFormElement>) => void;
+    func : (value: FieldValues) => void;
 }
