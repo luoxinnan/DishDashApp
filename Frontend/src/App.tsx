@@ -9,6 +9,7 @@ import NoDishCards from './components/NoDishCards';
 import YesDishCards from './components/YesDishCards';
 import { FieldValues } from 'react-hook-form';
 import { Dish, Ingred } from './components/appTypes';
+import { GetIngreds } from './services/ingredService';
 
 // --------temp------
 
@@ -25,11 +26,12 @@ const defaltYesDishes = [d1, d2];
 const defaltNoDishes = [d3];
 
 //-----------------
+const seedIngreds = await GetIngreds();
 
 
 export function App() {
 
-  const [allIngreds, setAllIngreds] = useState<Ingred[]>(defaultIngreds);
+  const [allIngreds, setAllIngreds] = useState<Ingred[]>(seedIngreds);
   const [yesDishes, setYesDishes] = useState<Dish[]>(defaltYesDishes);
   const [NoDishes, setNoDishes] = useState<Dish[]>(defaltNoDishes);
   // const [isIngredPage, setIsIngredpage] = useState<boolean>(false);

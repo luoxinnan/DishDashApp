@@ -52,13 +52,14 @@ public static class SeedData
     {
         var ingredients = new List<Ingredient>
         {
-            new Ingredient { Name = "Tomato", Quantity = 10 },
-            new Ingredient { Name = "Egg", Quantity = 20 },
+            new Ingredient { Name = "Tomato", Quantity = 8 },
+            new Ingredient { Name = "Egg", Quantity = 12 },
             new Ingredient { Name = "Spaghetti", Quantity = 5 },
             new Ingredient { Name = "Bacon", Quantity = 8 },
-            new Ingredient { Name = "Chicken", Quantity = 12 },
+            new Ingredient { Name = "Chicken", Quantity = 5 },
             new Ingredient { Name = "Bell pepper", Quantity = 6 },
-            new Ingredient { Name = "Onion", Quantity = 7 }
+            new Ingredient { Name = "Onion", Quantity = 10 },
+            new Ingredient { Name = "Ginger", Quantity = 2 }
             // Add more ingredients as needed
         };
 
@@ -77,12 +78,12 @@ public static class SeedData
             new DishIngredient { DishId = 2, IngredientId = 3, Quantity = 1 }, // Spaghetti
             new DishIngredient { DishId = 2, IngredientId = 2, Quantity = 2 }, // Eggs
             new DishIngredient { DishId = 2, IngredientId = 4, Quantity = 3 }, // Bacon
-            new DishIngredient { DishId = 2, IngredientId = 7, Quantity = 1 }, // Onion
+            new DishIngredient { DishId = 2, IngredientId = 5, Quantity = 1 }, // Onion
 
             // Chicken Stir Fry
-            new DishIngredient { DishId = 3, IngredientId = 5, Quantity = 2 }, // Chicken
-            new DishIngredient { DishId = 3, IngredientId = 6, Quantity = 1 }, // Bell pepper
-            new DishIngredient { DishId = 3, IngredientId = 7, Quantity = 1 }, // Onion
+            new DishIngredient { DishId = 3, IngredientId = 1, Quantity = 2 }, // Chicken
+            new DishIngredient { DishId = 3, IngredientId = 3, Quantity = 1 }, // Bell pepper
+            new DishIngredient { DishId = 3, IngredientId = 1, Quantity = 1 }, // Onion
 
             // Chicken Soup (using common ingredients)
             new DishIngredient { DishId = 4, IngredientId = 5, Quantity = 1 }, // Chicken
