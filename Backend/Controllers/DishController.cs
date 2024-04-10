@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Backend.Models;
 using Backend.Services;
+using Backend.Dtos;
 
 namespace Backend.Controllers;
 
@@ -28,81 +24,40 @@ public class DishController : ControllerBase
         return await _service.GetAllDishes();
     }
 
-    // // GET: api/Dish/5
-    // [HttpGet("{id}")]
-    // public async Task<ActionResult<Dish>> GetDish(int id)
-    // {
-    //     var dish = await _context.Dish.FindAsync(id);
+    [HttpGet("{name}")]
+    public async Task<ActionResult<DishDto>> GetIngredient(string name)
+    {
+        var response = await _service.GetDishByName(name);
+        if (response == null)
+            return NotFound();
+        return Ok(response);
+    }
 
-    //     if (dish == null)
-    //     {
-    //         return NotFound();
-    //     }
+    // DELETE: api/Dish/5
+    [HttpDelete("{name}")]
+    public async Task<IActionResult> DeleteDish(string name)
+    {
+        try
+        {
+            await _service.DeleteDishByName(name);
+            return Ok();
+        }
+        catch (FileNotFoundException)
+        {
+            return NotFound();
+        }
+        catch (ArgumentException)
+        {
+            return NoContent();
+        }
+    }
 
-    //     return dish;
-    // }
 
-    // // PUT: api/Dish/5
-    // // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    // [HttpPut("{id}")]
-    // public async Task<IActionResult> PutDish(int id, Dish dish)
-    // {
-    //     if (id != dish.Id)
-    //     {
-    //         return BadRequest();
-    //     }
+    [HttpGet("DishExists")]
+    public async Task<IActionResult> CheckDishExists(string name){
+        var exist =  _service.DishExists(name);
+        return Ok(exist);
+    }
 
-    //     _context.Entry(dish).State = EntityState.Modified;
-
-    //     try
-    //     {
-    //         await _context.SaveChangesAsync();
-    //     }
-    //     catch (DbUpdateConcurrencyException)
-    //     {
-    //         if (!DishExists(id))
-    //         {
-    //             return NotFound();
-    //         }
-    //         else
-    //         {
-    //             throw;
-    //         }
-    //     }
-
-    //     return NoContent();
-    // }
-
-    // // POST: api/Dish
-    // // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    // [HttpPost]
-    // public async Task<ActionResult<Dish>> PostDish(Dish dish)
-    // {
-    //     _context.Dish.Add(dish);
-    //     await _context.SaveChangesAsync();
-
-    //     return CreatedAtAction("GetDish", new { id = dish.Id }, dish);
-    // }
-
-    // // DELETE: api/Dish/5
-    // [HttpDelete("{id}")]
-    // public async Task<IActionResult> DeleteDish(int id)
-    // {
-    //     var dish = await _context.Dish.FindAsync(id);
-    //     if (dish == null)
-    //     {
-    //         return NotFound();
-    //     }
-
-    //     _context.Dish.Remove(dish);
-    //     await _context.SaveChangesAsync();
-
-    //     return NoContent();
-    // }
-
-    // private bool DishExists(int id)
-    // {
-    //     return _context.Dish.Any(e => e.Id == id);
-    // }
 }
 

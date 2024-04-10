@@ -9,5 +9,6 @@ namespace JokesAPI.Configuration;
         {
             CreateMap<IngredientRequest, Ingredient>().ReverseMap();
             CreateMap<IngredientResponse, Ingredient>().ReverseMap();
+            CreateMap<DishDto, Dish>().ReverseMap();
         }
     }
