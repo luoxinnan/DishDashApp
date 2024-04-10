@@ -17,11 +17,49 @@ public class DishService
         _mapper = mapper;
     }
 
-    public async Task<List<DishDto>> GetAllDishes()
+    public async Task<Object> GetAllDishes()
     {
-        var dishes = await _context.Dish
-            .ToListAsync();
-        return dishes.Select(d => _mapper.Map<DishDto>(d)).ToList();
+               var dishes = await _context.Dish.ToListAsync();
+        var ingredients = await _context.Ingredient.ToListAsync();
+
+        // Filter out dishes with enough and not enough ingredients
+        var yesDishes = new List<DishModel>();
+        var noDishes = new List<DishModel>();
+
+        foreach (var dish in dishes)
+        {
+            // Check if all ingredients for the dish have enough quantity
+            bool hasEnoughIngredients = true;
+            var ingredsEnough = new List<IngredientModel>();
+            var ingredsNotEnough = new List<IngredientModel>();
+
+            foreach (var dishIngred in _context.DishIngredient.Where(d => d.DishId == dish.Id))
+            {
+                var ingredient = ingredients.FirstOrDefault(i => i.Id == dishIngred.IngredientId);
+                if (ingredient == null || ingredient.Quantity < dishIngred.Quantity)
+                {
+                    hasEnoughIngredients = false;
+                    ingredsNotEnough.Add(new IngredientModel { name = ingredient.Name, quantity = dishIngred.Quantity });
+                }
+                else
+                {
+                    ingredsEnough.Add(new IngredientModel { name = ingredient.Name, quantity = dishIngred.Quantity });
+                }
+            }
+
+            var dishObject = new DishModel
+            {
+                name = dish.Name,
+                ingredsEnough = ingredsEnough,
+                ingredsNotEnough = ingredsNotEnough
+            };
+
+            if (hasEnoughIngredients)
+                yesDishes.Add(dishObject);
+            else
+                noDishes.Add(dishObject);
+        }
+        return new {YesDishes = yesDishes, NoDishes = noDishes};
     }
 
     public async Task<DishDto> GetDishByName(string name)
