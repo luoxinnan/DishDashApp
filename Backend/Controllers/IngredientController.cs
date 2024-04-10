@@ -36,12 +36,12 @@ public class IngredientController : ControllerBase
         return response;
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutIngredient(int id, IngredientRequest dto)
+    [HttpPut]
+    public async Task<IActionResult> PutIngredient(IngredientRequest dto)
     {
         try
         {
-            await _service.UpdateIngredient(id, dto);
+            await _service.UpdateIngredient(dto);
             return Ok();
         }
         catch (DbUpdateException e)

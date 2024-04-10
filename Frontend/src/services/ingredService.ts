@@ -18,3 +18,16 @@ export async function PostIngred(newIngred: Ingred){
     if(!response.ok)
         throw new Error('Faild to add new ingredient')
 }
+
+export async function PutIngred(ingred: Ingred){
+    const name = ingred.name;
+    const quantity = ingred.quantity;
+    const response = await fetch("http://localhost:5279/api/Ingredient",{
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name, quantity})
+    })
+
+    if(!response.ok)
+        throw new Error('Faild to change ingredient quantity')
+}

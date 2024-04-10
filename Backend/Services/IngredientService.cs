@@ -30,13 +30,13 @@ public class IngredientService
         return _mapper.Map<IngredientResponse>(ingred);
     }
 
-    public async Task UpdateIngredient(int id, IngredientRequest dto)
+    public async Task UpdateIngredient(IngredientRequest dto)
     {
-        var existingIngred = await _context.Ingredient.FindAsync(id);
+        var existingIngred = await _context.Ingredient.FirstOrDefaultAsync(i => i.Name == dto.Name);
 
         if (existingIngred == null)
         {
-            throw new ArgumentException("yo this guy does not exist");
+            throw new ArgumentException("yo this ingredient does not exist");
         }
         existingIngred.Name = dto.Name;
         existingIngred.Quantity = dto.Quantity;
