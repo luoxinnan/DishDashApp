@@ -42,7 +42,9 @@ public class DishService
             foreach (var dishIngred in _context.DishIngredient.Where(d => d.DishName == dish.Name))
             {
                 var ingredient = ingredients.FirstOrDefault(i => i.Name == dishIngred.IngredientName);
-                if (ingredient == null || ingredient.Quantity < dishIngred.Quantity)
+                if(ingredient == null)
+                    continue;
+                if (ingredient.Quantity < dishIngred.Quantity)
                 {
                     hasEnoughIngredients = false;
                     ingredsNotEnough.Add(new IngredientModel { name = ingredient.Name, quantity = dishIngred.Quantity });

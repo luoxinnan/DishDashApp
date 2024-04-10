@@ -48,6 +48,7 @@ useEffect(() => {
   }
 
   async function addDish(dishName: string, ingreds: Ingred[]) {
+    
     await PostDish(dishName, ingreds);
     setYesDishes(await GetYesDishes());
     setNoDishes(await GetNoDishes());

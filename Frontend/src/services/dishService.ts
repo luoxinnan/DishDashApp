@@ -41,11 +41,28 @@ export async function GetNoDishes(): Promise<Dish[]>{
 }
 
 export async function PostDish(dishName: string, ingreds: Ingred[]){
-    const response = await fetch("http://localhost:5279/api/Dish", {
+    const disResponse = await fetch("http://localhost:5279/api/Dish", {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({name: dishName})
     });
-    if(!response.ok)
-        throw new Error('Faild to add new dish')
+    if(!disResponse.ok)
+        throw new Error('Failed to add new dish')
+
+    for (const ingred of ingreds) {
+        const dishIngredResponse = await fetch("http://localhost:5279/api/DishIngredient", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ 
+                DishName: dishName, 
+                IngredientName: ingred.name, 
+                Quantity: ingred.quantity // Ensure property name is "Quantity"
+            })
+        });
+        if(!dishIngredResponse.ok)
+            throw new Error("Failed to add new DishIngred");
+    }
+
+    
 }
+
