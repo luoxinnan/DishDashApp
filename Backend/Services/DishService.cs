@@ -63,17 +63,20 @@ public async Task<Object> GetAllClassifiedDishes()
             }
         }
 
-        var dishObject = new DishModel
+        if(!(ingredsEnough.Count == 0 && ingredsNotEnough.Count == 0))
         {
-            name = dish.Name,
-            ingredsEnough = ingredsEnough,
-            ingredsNotEnough = ingredsNotEnough
-        };
+            var dishObject = new DishModel
+            {
+                name = dish.Name,
+                ingredsEnough = ingredsEnough,
+                ingredsNotEnough = ingredsNotEnough
+            };
 
-        if (hasEnoughIngredients)
-            yesDishes.Add(dishObject);
-        else
-            noDishes.Add(dishObject);
+            if (hasEnoughIngredients)
+                yesDishes.Add(dishObject);
+            else
+                noDishes.Add(dishObject);
+        }
     }
     return new { YesDishes = yesDishes, NoDishes = noDishes };
 }

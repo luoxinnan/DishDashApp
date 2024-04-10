@@ -66,6 +66,13 @@ useEffect(() => {
     setAllIngreds(newAllIngreds);
     setYesDishes(await GetYesDishes());
     setNoDishes(await GetNoDishes());
+  }
+
+  async function deleteDishFromYesDishs(i: number){
+
+  }
+
+  async function deleteDishFromNoDishs(i: number){
 
   }
 
@@ -83,8 +90,8 @@ useEffect(() => {
         </Route>
 
         <Route exact path="/dishes">
-          <YesDishCards dishes={yesDishes} cookFunc={cookAndUpdate} />
-          <NoDishCards dishes={noDishes} cookFunc={cookAndUpdate} />
+          <YesDishCards dishes={yesDishes} cookFunc={cookAndUpdate} deleteFunc={deleteDishFromYesDishs} />
+          <NoDishCards dishes={noDishes} cookFunc={cookAndUpdate} deleteFunc={deleteDishFromNoDishs}/>
           <Link to="/dishes/add-dish"><button className="btn btn-primary float-right mt-10 absolute bottom-0 right-0 mb-20 mr-10">+</button></Link>
         </Route>
 

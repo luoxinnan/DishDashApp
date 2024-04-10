@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.Models;
+using Microsoft.JSInterop.Infrastructure;
 
 namespace Backend.Controllers
 {
@@ -84,19 +85,21 @@ namespace Backend.Controllers
         }
 
         // DELETE: api/DishIngredient/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDishIngredient(int id)
+        [HttpDelete("{name}")]
+        public async Task<IActionResult> DeleteDishIngredient(string name)
         {
-            var dishIngredient = await _context.DishIngredient.FindAsync(id);
-            if (dishIngredient == null)
-            {
+            var allDishIngreds = await _context.DishIngredient.ToListAsync();
+            if (allDishIngreds == null)
                 return NotFound();
+            
+            var dishIngreds = allDishIngreds.Where(d => d.DishName == name);
+            foreach(var di in dishIngreds)
+            {
+                _context.DishIngredient.Remove(di);
+                await _context.SaveChangesAsync();
             }
 
-            _context.DishIngredient.Remove(dishIngredient);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok();
         }
 
         private bool DishIngredientExists(int id)
