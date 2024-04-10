@@ -1,7 +1,7 @@
 
 import { BrowserRouter as Router, Route, Switch, Link, useHistory } from 'react-router-dom';
 import { FormEvent, useState } from "react";
-import { Ingred } from './appTypes';
+import { Ingred } from '../appTypes';
 import { Button, buttonVariants } from "@/components/ui/button"
 
 

@@ -83,7 +83,6 @@ public static class SeedData
             // Chicken Stir Fry
             new DishIngredient { DishId = 3, IngredientId = 1, Quantity = 2 }, // Chicken
             new DishIngredient { DishId = 3, IngredientId = 3, Quantity = 1 }, // Bell pepper
-            new DishIngredient { DishId = 3, IngredientId = 1, Quantity = 1 }, // Onion
 
             // Chicken Soup (using common ingredients)
             new DishIngredient { DishId = 4, IngredientId = 5, Quantity = 1 }, // Chicken

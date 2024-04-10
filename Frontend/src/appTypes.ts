@@ -5,5 +5,6 @@ export type Ingred = {
   
   export type Dish = {
     name: string;
-    ingreds: Ingred[];
+    ingredsEnough: Ingred[];
+    ingredsNotEnough: Ingred[];
   }

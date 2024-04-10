@@ -1,5 +1,5 @@
 
-import { Dish } from "./appTypes";
+import { Dish } from "../appTypes";
 import DishCard from "./DishCard"
 
 export default function YesDishCards({dishes, cookFunc}: Props){

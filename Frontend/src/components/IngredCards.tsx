@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Counter from "./Counter";
 import "./styles/ingredCardsStyles.css"
-import { Ingred } from './appTypes';
+import { Ingred } from '../appTypes';
 import { DeleteIngred, GetIngreds, PutIngred } from "@/services/ingredService";
 
 export default function IngredCards({ingreds }: Props){

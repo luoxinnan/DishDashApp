@@ -15,11 +15,13 @@ public class DishController : ControllerBase
 {
     private readonly DishService _service;
     private readonly IMapper _mapper;
+    private readonly FoodDBContext _context;
 
-    public DishController(DishService service, IMapper mapper)
+    public DishController(DishService service, FoodDBContext context, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;
+        _context = context;
     }
     [HttpGet]
     public async Task<ActionResult<IEnumerable<object>>> GetDishes()

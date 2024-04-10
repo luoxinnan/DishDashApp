@@ -8,27 +8,29 @@ import AddDishDetailForm from './components/AddDishDetailForm';
 import NoDishCards from './components/NoDishCards';
 import YesDishCards from './components/YesDishCards';
 import { FieldValues } from 'react-hook-form';
-import { Dish, Ingred } from './components/appTypes';
+import { Dish, Ingred } from './appTypes';
 import { GetIngreds, PostIngred } from './services/ingredService';
+import {  GetNoDishes, GetYesDishes } from './services/dishService';
 
-// --------temp------
+// // --------temp------
 
+// const d1 = { name: "Tomato fried egg", ingredsEnough: [{ name: "Egg", quantity: 3 }, { name: "Tomato", quantity: 1 }], ingredsNotEnough: [] }
+// const d2 = { name: "Egg soup", ingredsEnough: [{ name: "Egg", quantity: 1 }],  ingredsNotEnough: [] }
+// const d3 = { name: "Steak", ingredsEnough: [{ name: "Beef", quantity: 1 }], ingredsNotEnough: [] }
+// const defaultYesDishes = [d1, d2];
+// const defaultNoDishes = [d3];
+// //-----------------
 
-const d1 = { name: "Tomato fried egg", ingreds: [{ name: "Egg", quantity: 3 }, { name: "Tomato", quantity: 1 }] }
-const d2 = { name: "Egg soup", ingreds: [{ name: "Egg", quantity: 1 }] }
-const d3 = { name: "Steak", ingreds: [{ name: "Beef", quantity: 1 }] }
-const defaltYesDishes = [d1, d2];
-const defaltNoDishes = [d3];
-
-//-----------------
 const seedIngreds = await GetIngreds();
+const seedYesDishes: Dish[] = await GetYesDishes();
+const seedNoDishes : Dish[]= await GetNoDishes();
 
 
 export function App() {
 
   const [allIngreds, setAllIngreds] = useState<Ingred[]>(seedIngreds);
-  const [yesDishes, setYesDishes] = useState<Dish[]>(defaltYesDishes);
-  const [NoDishes, setNoDishes] = useState<Dish[]>(defaltNoDishes);
+  const [yesDishes, setYesDishes] = useState<Dish[]>(seedYesDishes);
+  const [NoDishes, setNoDishes] = useState<Dish[]>(seedNoDishes);
 
 useEffect(() => {
   }, []); 
@@ -42,15 +44,12 @@ useEffect(() => {
   }
 
   function addDish(dishName: string, ingreds: Ingred[]) {
-    const dish: Dish = { name: dishName, ingreds: ingreds }
+    // const dish: Dish = { name: dishName, ingreds: ingreds }
+
     /*
       1.send a http post request for adding a new dish
       2. calculate if it is a yes dish or no dish, and update state accordingly
     */
-    // --------for test--------
-    const newNoDishes = [...NoDishes, dish];
-    setNoDishes(newNoDishes)
-    //------------------------
 
 
   }
@@ -58,7 +57,7 @@ useEffect(() => {
   function cookAndUpdate(i: number) {
     const dish = yesDishes[i];
     const newAllIngreds = [...allIngreds];
-    dish.ingreds.forEach(dishIngred => {
+    dish.ingredsEnough.forEach(dishIngred => {
       const ingredIndex = newAllIngreds.findIndex(ing => ing.name == dishIngred.name);
       if (ingredIndex != -1)
         newAllIngreds[ingredIndex].quantity -= dishIngred.quantity;
