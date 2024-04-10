@@ -1,11 +1,14 @@
 import { useState } from "react";
 import Counter from "./Counter";
 import "./styles/ingredCardsStyles.css"
-import { Ingred } from '../appTypes';
+import { Dish, Ingred } from '../appTypes';
 import { DeleteIngred, GetIngreds, PutIngred } from "@/services/ingredService";
+import { GetNoDishes, GetYesDishes } from "@/services/dishService";
 
-export default function IngredCards({ingreds }: Props){
+export default function IngredCards({ingreds, yesDishes, noDishes }: Props){
     const [updatedIngreds, setUpdatedIngreds] = useState(ingreds);
+    const [NewYesDishes, setNewYesDishes] = useState<Dish[]>(yesDishes);
+    const [NewNoDishes, setNewNoDishes] = useState<Dish[]>(noDishes);
 
     async function handleQuantityChange (index: number, newQuantity: number) {
       const newIngreds = [...updatedIngreds];
@@ -18,6 +21,8 @@ export default function IngredCards({ingreds }: Props){
         await PutIngred(ingredToChange);
       }
       setUpdatedIngreds(await GetIngreds());
+      setNewYesDishes(await GetYesDishes());
+      setNewNoDishes(await GetNoDishes());
     };
   
 
@@ -42,5 +47,7 @@ export default function IngredCards({ingreds }: Props){
 
 
 type Props = {
-    ingreds: Ingred[]
+    ingreds: Ingred[];
+    yesDishes: Dish[];
+    noDishes: Dish[];
 }

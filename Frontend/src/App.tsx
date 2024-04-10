@@ -30,7 +30,7 @@ export function App() {
 
   const [allIngreds, setAllIngreds] = useState<Ingred[]>(seedIngreds);
   const [yesDishes, setYesDishes] = useState<Dish[]>(seedYesDishes);
-  const [NoDishes, setNoDishes] = useState<Dish[]>(seedNoDishes);
+  const [noDishes, setNoDishes] = useState<Dish[]>(seedNoDishes);
 
 useEffect(() => {
   }, []); 
@@ -41,6 +41,10 @@ useEffect(() => {
     const newIngred: Ingred = { name: name, quantity: 1 }
     await PostIngred(newIngred);
     setAllIngreds(await GetIngreds());
+
+    // update dishes when new ingred added
+    setYesDishes(await GetYesDishes());
+    setNoDishes(await GetNoDishes());
   }
 
   function addDish(dishName: string, ingreds: Ingred[]) {
@@ -79,12 +83,12 @@ useEffect(() => {
 
         <Route exact path="/">
           <AddIngredForm func={addNewIngred} />
-          <IngredCards ingreds={allIngreds} />
+          <IngredCards ingreds={allIngreds} yesDishes={yesDishes} noDishes={noDishes} />
         </Route>
 
         <Route exact path="/dishes">
           <YesDishCards dishes={yesDishes} cookFunc={cookAndUpdate} />
-          <NoDishCards dishes={NoDishes} cookFunc={cookAndUpdate} />
+          <NoDishCards dishes={noDishes} cookFunc={cookAndUpdate} />
           <Link to="/dishes/add-dish"><button className="btn btn-primary float-right mt-10 absolute bottom-0 right-0 mb-20 mr-10">+</button></Link>
         </Route>
 
