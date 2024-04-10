@@ -63,16 +63,16 @@ public class IngredientService
 
     
 
-    public async Task DeleteIngredientById(int id)
+    public async Task DeleteIngredientByName(string name)
     {
         if (_context.Ingredient == null)
             throw new FileNotFoundException();
 
-        var ingred = await _context.Ingredient.FindAsync(id);
-        if (ingred == null)
+        var existingIngred = await _context.Ingredient.FirstOrDefaultAsync(i => i.Name == name);
+        if (existingIngred == null)
             throw new FileNotFoundException();
 
-        _context.Ingredient.Remove(ingred);
+        _context.Ingredient.Remove(existingIngred);
 
         try
         {

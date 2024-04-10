@@ -70,12 +70,12 @@ public class IngredientController : ControllerBase
         }
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteIngredient(int id)
+    [HttpDelete]
+    public async Task<IActionResult> DeleteIngredient(string name)
     {
         try
         {
-            await _service.DeleteIngredientById(id);
+            await _service.DeleteIngredientByName(name);
             return Ok();
         }
         catch (FileNotFoundException)

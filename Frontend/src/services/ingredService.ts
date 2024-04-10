@@ -31,3 +31,17 @@ export async function PutIngred(ingred: Ingred){
     if(!response.ok)
         throw new Error('Faild to change ingredient quantity')
 }
+
+export async function DeleteIngred(name: string){
+    const response = await fetch(`http://localhost:5279/api/Ingredient?name=${name}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    
+      if (!response.ok) {
+        throw new Error('Failed to delete customer');
+      }
+    
+}

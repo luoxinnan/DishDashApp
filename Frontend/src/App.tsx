@@ -37,10 +37,8 @@ useEffect(() => {
     const name = value.foodname;
     
     const newIngred: Ingred = { name: name, quantity: 1 }
-    PostIngred(newIngred);
-
-    const UpdatedIngreds = await GetIngreds();
-    setAllIngreds(UpdatedIngreds);
+    await PostIngred(newIngred);
+    setAllIngreds(await GetIngreds());
   }
 
   function addDish(dishName: string, ingreds: Ingred[]) {
