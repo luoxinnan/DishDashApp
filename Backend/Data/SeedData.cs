@@ -53,11 +53,11 @@ public static class SeedData
         var ingredients = new List<Ingredient>
         {
             new Ingredient { Name = "Tomato", Quantity = 8 },
-            new Ingredient { Name = "Egg", Quantity = 12 },
+            new Ingredient { Name = "Egg", Quantity = 2 },
             new Ingredient { Name = "Spaghetti", Quantity = 5 },
-            new Ingredient { Name = "Bacon", Quantity = 8 },
+            new Ingredient { Name = "Bacon", Quantity = 2 },
             new Ingredient { Name = "Chicken", Quantity = 5 },
-            new Ingredient { Name = "Bell pepper", Quantity = 6 },
+            new Ingredient { Name = "Bell pepper", Quantity = 1 },
             new Ingredient { Name = "Onion", Quantity = 10 },
             new Ingredient { Name = "Ginger", Quantity = 2 }
             // Add more ingredients as needed
