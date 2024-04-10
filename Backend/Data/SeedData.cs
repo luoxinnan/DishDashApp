@@ -66,30 +66,31 @@ public static class SeedData
         context.Ingredient.AddRange(ingredients);
     }
 
-    private static void SeedDishIngredients(FoodDBContext context)
+private static void SeedDishIngredients(FoodDBContext context)
+{
+    var dishIngredients = new List<DishIngredient>
     {
-        var dishIngredients = new List<DishIngredient>
-        {
-            // Tomato fried egg
-            new DishIngredient { DishId = 1, IngredientId = 1, Quantity = 2 }, // Tomatoes
-            new DishIngredient { DishId = 1, IngredientId = 2, Quantity = 3 }, // Eggs
+        // Tomato fried egg
+        new DishIngredient { DishName = "Tomato fried egg", IngredientName = "Tomato", Quantity = 2 },
+        new DishIngredient { DishName = "Tomato fried egg", IngredientName = "Egg", Quantity = 3 },
 
-            // Spaghetti Carbonara
-            new DishIngredient { DishId = 2, IngredientId = 3, Quantity = 1 }, // Spaghetti
-            new DishIngredient { DishId = 2, IngredientId = 2, Quantity = 2 }, // Eggs
-            new DishIngredient { DishId = 2, IngredientId = 4, Quantity = 3 }, // Bacon
-            new DishIngredient { DishId = 2, IngredientId = 5, Quantity = 1 }, // Onion
+        // Spaghetti Carbonara
+        new DishIngredient { DishName = "Spaghetti Carbonara", IngredientName = "Spaghetti", Quantity = 1 },
+        new DishIngredient { DishName = "Spaghetti Carbonara", IngredientName = "Egg", Quantity = 2 },
+        new DishIngredient { DishName = "Spaghetti Carbonara", IngredientName = "Bacon", Quantity = 3 },
+        new DishIngredient { DishName = "Spaghetti Carbonara", IngredientName = "Onion", Quantity = 1 },
 
-            // Chicken Stir Fry
-            new DishIngredient { DishId = 3, IngredientId = 1, Quantity = 2 }, // Chicken
-            new DishIngredient { DishId = 3, IngredientId = 3, Quantity = 1 }, // Bell pepper
+        // Chicken Stir Fry
+        new DishIngredient { DishName = "Chicken Stir Fry", IngredientName = "Chicken", Quantity = 2 },
+        new DishIngredient { DishName = "Chicken Stir Fry", IngredientName = "Spaghetti", Quantity = 1 },
+        new DishIngredient { DishName = "Chicken Stir Fry", IngredientName = "Onion", Quantity = 1 },
 
-            // Chicken Soup (using common ingredients)
-            new DishIngredient { DishId = 4, IngredientId = 5, Quantity = 1 }, // Chicken
-            new DishIngredient { DishId = 4, IngredientId = 7, Quantity = 1 }, // Onion
-            new DishIngredient { DishId = 4, IngredientId = 1, Quantity = 2 }, // Tomatoes
-        };
+        // Chicken Soup (using common ingredients)
+        new DishIngredient { DishName = "Chicken Soup", IngredientName = "Chicken", Quantity = 1 },
+        new DishIngredient { DishName = "Chicken Soup", IngredientName = "Onion", Quantity = 1 },
+        new DishIngredient { DishName = "Chicken Soup", IngredientName = "Tomato", Quantity = 2 }
+    };
 
-        context.DishIngredient.AddRange(dishIngredients);
-    }
+    context.DishIngredient.AddRange(dishIngredients);
+}
 }

@@ -33,9 +33,9 @@ public class DishService
             var ingredsEnough = new List<IngredientModel>();
             var ingredsNotEnough = new List<IngredientModel>();
 
-            foreach (var dishIngred in _context.DishIngredient.Where(d => d.DishId == dish.Id))
+            foreach (var dishIngred in _context.DishIngredient.Where(d => d.DishName == dish.Name))
             {
-                var ingredient = ingredients.FirstOrDefault(i => i.Id == dishIngred.IngredientId);
+                var ingredient = ingredients.FirstOrDefault(i => i.Name == dishIngred.IngredientName);
                 if (ingredient == null || ingredient.Quantity < dishIngred.Quantity)
                 {
                     hasEnoughIngredients = false;

@@ -39,3 +39,8 @@ export async function GetNoDishes(): Promise<Dish[]>{
     });
     return noDishes;
 }
+
+export async function PostDish(newDish: Dish){
+    const name = newDish.name;
+    
+}

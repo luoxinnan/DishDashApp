@@ -48,12 +48,7 @@ useEffect(() => {
   }
 
   function addDish(dishName: string, ingreds: Ingred[]) {
-    // const dish: Dish = { name: dishName, ingreds: ingreds }
 
-    /*
-      1.send a http post request for adding a new dish
-      2. calculate if it is a yes dish or no dish, and update state accordingly
-    */
 
 
   }
