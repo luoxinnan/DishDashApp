@@ -10,11 +10,11 @@ import { useState } from "react";
 
 
 
-export default function DishCard({ dish, func, i, canCook }: dishCardProps) {
+export default function DishCard({ dish, cookFunc, i, canCook }: dishCardProps) {
     const [showAlert, setShowAlert] = useState<boolean>(false);
 
     function handleClickCook(i: number) {
-        func(i);
+        cookFunc(i);
         setShowAlert(true);
         setTimeout(() => setShowAlert(false), 2000);
     }
@@ -48,7 +48,7 @@ export default function DishCard({ dish, func, i, canCook }: dishCardProps) {
 
 type dishCardProps = {
     dish: Dish;
-    func: (i: number) => void;
+    cookFunc: (i: number) => void;
     i: number;
     canCook: boolean;
 }

@@ -23,52 +23,61 @@ public class DishService
         return dishes.Select(d => _mapper.Map<DishDto>(d)).ToList();
     }
 
-    public async Task<Object> GetAllClassifiedDishes()
+public async Task<Object> GetAllClassifiedDishes()
+{
+    var dishes = await _context.Dish.ToListAsync();
+    var ingredients = await _context.Ingredient.ToListAsync();
+
+    // Filter out dishes with enough and not enough ingredients
+    var yesDishes = new List<DishModel>();
+    var noDishes = new List<DishModel>();
+
+    foreach (var dish in dishes)
     {
-               var dishes = await _context.Dish.ToListAsync();
-        var ingredients = await _context.Ingredient.ToListAsync();
+        // Check if all ingredients for the dish have enough quantity
+        bool hasEnoughIngredients = true;
+        var ingredsEnough = new List<IngredientModel>();
+        var ingredsNotEnough = new List<IngredientModel>();
 
-        // Filter out dishes with enough and not enough ingredients
-        var yesDishes = new List<DishModel>();
-        var noDishes = new List<DishModel>();
-
-        foreach (var dish in dishes)
+        foreach (var dishIngred in _context.DishIngredient.Where(d => d.DishName == dish.Name))
         {
-            // Check if all ingredients for the dish have enough quantity
-            bool hasEnoughIngredients = true;
-            var ingredsEnough = new List<IngredientModel>();
-            var ingredsNotEnough = new List<IngredientModel>();
-
-            foreach (var dishIngred in _context.DishIngredient.Where(d => d.DishName == dish.Name))
+            var ingredient = ingredients.FirstOrDefault(i => i.Name == dishIngred.IngredientName);
+            if (ingredient == null || ingredient.Quantity < dishIngred.Quantity)
             {
-                var ingredient = ingredients.FirstOrDefault(i => i.Name == dishIngred.IngredientName);
-                if(ingredient == null)
-                    continue;
-                if (ingredient.Quantity < dishIngred.Quantity)
+                // If ingredient is null or quantity is not enough, categorize the dish as NoDish
+                hasEnoughIngredients = false;
+                if (ingredient != null)
                 {
-                    hasEnoughIngredients = false;
+                    // Add the missing ingredient to ingredsNotEnough list
                     ingredsNotEnough.Add(new IngredientModel { name = ingredient.Name, quantity = dishIngred.Quantity });
                 }
                 else
                 {
-                    ingredsEnough.Add(new IngredientModel { name = ingredient.Name, quantity = dishIngred.Quantity });
+                    // If ingredient is not found in the database, add it directly to ingredsNotEnough list
+                    ingredsNotEnough.Add(new IngredientModel { name = dishIngred.IngredientName, quantity = dishIngred.Quantity });
                 }
             }
-
-            var dishObject = new DishModel
-            {
-                name = dish.Name,
-                ingredsEnough = ingredsEnough,
-                ingredsNotEnough = ingredsNotEnough
-            };
-
-            if (hasEnoughIngredients)
-                yesDishes.Add(dishObject);
             else
-                noDishes.Add(dishObject);
+            {
+                ingredsEnough.Add(new IngredientModel { name = ingredient.Name, quantity = dishIngred.Quantity });
+            }
         }
-        return new {YesDishes = yesDishes, NoDishes = noDishes};
+
+        var dishObject = new DishModel
+        {
+            name = dish.Name,
+            ingredsEnough = ingredsEnough,
+            ingredsNotEnough = ingredsNotEnough
+        };
+
+        if (hasEnoughIngredients)
+            yesDishes.Add(dishObject);
+        else
+            noDishes.Add(dishObject);
     }
+    return new { YesDishes = yesDishes, NoDishes = noDishes };
+}
+
 
     public async Task<DishDto> GetDishByName(string name)
     {

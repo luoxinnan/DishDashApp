@@ -1,6 +1,6 @@
 import { Dish, Ingred } from "@/appTypes";
 
- async function GetDishes(){
+export async function GetDishes(){
     const response = await fetch("http://localhost:5279/api/Dish");
     const allDishesData = await response.json();
     return allDishesData;
