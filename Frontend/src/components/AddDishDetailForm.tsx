@@ -2,7 +2,6 @@
 import { BrowserRouter as Router, Route, Switch, Link, useHistory } from 'react-router-dom';
 import { FormEvent, useState } from "react";
 import { Ingred } from '../appTypes';
-import { Button, buttonVariants } from "@/components/ui/button"
 
 
 type Props = {
@@ -51,7 +50,7 @@ export default function AddDishDetailForm({ func }: Props) {
                     <input type="text" name="dishName" placeholder="Type here" onChange={event => changeDishName(event.target.value)} className="input input-bordered w-full max-w-xs" />
                 </div>
                 <label>Ingredients </label>
-                <button className='btn btn-primary btn-sm' type="button" onClick={addIngredForm}> + </button>
+                <button className='btn btn-primary btn-sm ml-3' type="button" onClick={addIngredForm}> + </button>
                 <section className="ingred-form">
                     {
                         ingredForms.map((ingred, i) =>
@@ -88,14 +87,14 @@ export default function AddDishDetailForm({ func }: Props) {
             )}
             <br />
 
-            <div style={{ fontSize: 10, color: 'gray' }}>
+            {/* <div style={{ fontSize: 10, color: 'gray' }}>
                 <p>----------for testing----------</p>
                 <p>Dish: {dishName}</p>
                 {
                     ingredForms.map((ingred) => <p>{ingred.name}, {ingred.quantity}</p>)
                 }
                 <p>---------------------------------</p>
-            </div>
+            </div> */}
 
 
         </div>

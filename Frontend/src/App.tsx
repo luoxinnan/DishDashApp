@@ -10,7 +10,7 @@ import YesDishCards from './components/YesDishCards';
 import { FieldValues } from 'react-hook-form';
 import { Dish, Ingred } from './appTypes';
 import { GetIngreds, PostIngred, PutIngred } from './services/ingredService';
-import {  GetDishes, GetNoDishes, GetYesDishes, PostDish } from './services/dishService';
+import {  GetDishes, GetNoDishes, GetYesDishes, PostDish, deleteDish } from './services/dishService';
 
 
 const seedIngreds = await GetIngreds();
@@ -34,7 +34,6 @@ useEffect(() => {
     await PostIngred(newIngred);
     setAllIngreds(await GetIngreds());
 
-    // update dishes when new ingred added
     setYesDishes(await GetYesDishes());
     setNoDishes(await GetNoDishes());
   }
@@ -69,11 +68,17 @@ useEffect(() => {
   }
 
   async function deleteDishFromYesDishs(i: number){
-
+    const dish = yesDishes[i];
+    await deleteDish(dish.name);
+    setYesDishes(await GetYesDishes());
+    setNoDishes(await GetNoDishes());
   }
 
   async function deleteDishFromNoDishs(i: number){
-
+    const dish = noDishes[i];
+    await deleteDish(dish.name);
+    setYesDishes(await GetYesDishes());
+    setNoDishes(await GetNoDishes());
   }
 
 

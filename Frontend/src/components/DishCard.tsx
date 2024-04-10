@@ -12,7 +12,7 @@ import { useState } from "react";
 
 export default function DishCard({ dish, cookFunc, i, canCook, deleteFunc}: dishCardProps) {
     const [cookedAlert, setCookedAlert] = useState<boolean>(false);
-    const [deletedAlert, setDeletedAlert] = useState<boolean>(false);
+    // const [deletedAlert, setDeletedAlert] = useState<boolean>(false);
 
     function handleClickCook(i: number) {
         cookFunc(i);
@@ -22,8 +22,8 @@ export default function DishCard({ dish, cookFunc, i, canCook, deleteFunc}: dish
 
     function handleClickDelete(i: number) {
         deleteFunc(i);
-        setDeletedAlert(true);
-        setTimeout(() => setDeletedAlert(false), 2000)
+        // setDeletedAlert(true);
+        // setTimeout(() => setDeletedAlert(false), 2000)
     }
 
 
@@ -48,7 +48,7 @@ export default function DishCard({ dish, cookFunc, i, canCook, deleteFunc}: dish
                 ) : <>
                     <AccordionContent>
                         <button className="btn btn-xs btn-active btn-ghost flex-1 w-12 mr-2">Cook</button>
-                        <button className="btn btn-xs btn-outline btn-error flex-1 w-12 mr-2">Delete</button>
+                        <button onClick={() => handleClickDelete(i)} className="btn btn-xs btn-outline btn-error flex-1 w-12 mr-2">Delete</button>
                         <a href="https://www.youtube.com/@chefwang" className="link link-neutral ml-10 hover:text-teal-500">Go to recipe  &rarr; </a>
                     </AccordionContent>
                 </>}
@@ -60,13 +60,13 @@ export default function DishCard({ dish, cookFunc, i, canCook, deleteFunc}: dish
                         </div>
                     </div>
                 )}
-                {deletedAlert && (
+                {/* {deletedAlert && (
                     <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center p-4">
                         <div role="alert" className="alert alert-success w-20">
                             <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         </div>
                     </div>
-                )}
+                )} */}
             </AccordionItem>
         </Accordion>
     )

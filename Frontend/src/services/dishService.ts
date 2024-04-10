@@ -62,7 +62,20 @@ export async function PostDish(dishName: string, ingreds: Ingred[]){
         if(!dishIngredResponse.ok)
             throw new Error("Failed to add new DishIngred");
     }
-
-    
 }
+
+export async function deleteDish(name: string): Promise<void> {
+    const response = await fetch(`http://localhost:5279/api/DishIngredient/${name}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  
+    if (!response.ok) {
+      alert("Failed")
+      throw new Error('Failed to delete dish');
+    }
+  }
+  
 
