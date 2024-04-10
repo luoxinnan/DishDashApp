@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch, Link, useHistory } from 'react-router-dom';
 import AddIngredForm from './components/AddIngredForm';
 import IngredCards from './components/IngredCards';
@@ -29,6 +29,9 @@ export function App() {
   const [allIngreds, setAllIngreds] = useState<Ingred[]>(seedIngreds);
   const [yesDishes, setYesDishes] = useState<Dish[]>(defaltYesDishes);
   const [NoDishes, setNoDishes] = useState<Dish[]>(defaltNoDishes);
+
+useEffect(() => {
+  }, []); 
 
   async function addNewIngred(value: FieldValues) {
     const name = value.foodname;

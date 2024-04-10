@@ -7,10 +7,10 @@ import { PutIngred } from "@/services/ingredService";
 export default function IngredCards({ingreds }: Props){
     const [updatedIngreds, setUpdatedIngreds] = useState(ingreds);
 
-    function handleQuantityChange (index: number, newQuantity: number) {
+    async function handleQuantityChange (index: number, newQuantity: number) {
       const newIngreds = [...updatedIngreds];
       newIngreds[index].quantity = newQuantity;
-      PutIngred(newIngreds[index]);
+      await PutIngred(newIngreds[index]);
       setUpdatedIngreds(newIngreds);
     };
   
