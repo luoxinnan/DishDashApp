@@ -10,7 +10,7 @@ import YesDishCards from './components/YesDishCards';
 import { FieldValues } from 'react-hook-form';
 import { Dish, Ingred } from './appTypes';
 import { GetIngreds, PostIngred } from './services/ingredService';
-import {  GetNoDishes, GetYesDishes } from './services/dishService';
+import {  GetNoDishes, GetYesDishes, PostDish } from './services/dishService';
 
 // // --------temp------
 
@@ -47,9 +47,10 @@ useEffect(() => {
     setNoDishes(await GetNoDishes());
   }
 
-  function addDish(dishName: string, ingreds: Ingred[]) {
-
-
+  async function addDish(dishName: string, ingreds: Ingred[]) {
+    await PostDish(dishName, ingreds);
+    setYesDishes(await GetYesDishes());
+    setNoDishes(await GetNoDishes());
 
   }
 

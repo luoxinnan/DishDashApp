@@ -27,8 +27,17 @@ public class DishController : ControllerBase
     public async Task<ActionResult<IEnumerable<object>>> GetDishes()
     {
 
-        return Ok(_service.GetAllDishes());
+        return Ok(_service.GetAllClassifiedDishes());
     }
+
+    [HttpGet("DishNames")]
+    public async Task<ActionResult<IEnumerable<DishDto>>> GetDishesName()
+    {
+
+        return await _service.GetAllDisesName();
+    }
+
+ 
 
 
     [HttpGet("{name}")]
@@ -42,13 +51,13 @@ public class DishController : ControllerBase
 
 
     [HttpPost]
-    public async Task<ActionResult<DishDto>> PostIngredient(DishDto request)
+    public async Task<ActionResult<DishDto>> PostDish(DishDto request)
     {
         try
         {
             var newDish = await _service.CreateDish(request);
             var response = _mapper.Map<DishDto>(newDish);
-            return CreatedAtAction(nameof(GetIngredient), new { id = newDish.Id }, response);
+            return CreatedAtAction(nameof(GetIngredient), new { name = newDish.Name }, response);
 
         }
         catch (ArgumentException)

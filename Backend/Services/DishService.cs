@@ -17,7 +17,13 @@ public class DishService
         _mapper = mapper;
     }
 
-    public async Task<Object> GetAllDishes()
+    public async Task<List<DishDto>> GetAllDisesName(){
+        var dishes = await _context.Dish
+            .ToListAsync();
+        return dishes.Select(d => _mapper.Map<DishDto>(d)).ToList();
+    }
+
+    public async Task<Object> GetAllClassifiedDishes()
     {
                var dishes = await _context.Dish.ToListAsync();
         var ingredients = await _context.Ingredient.ToListAsync();

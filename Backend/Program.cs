@@ -22,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 builder.Services.AddScoped<DishService>();
 builder.Services.AddScoped<IngredientService>();
+builder.Services.AddScoped<DishIngredientService>();
 builder.Services.AddAutoMapper(typeof(AutomapperConfig)); 
 
 
