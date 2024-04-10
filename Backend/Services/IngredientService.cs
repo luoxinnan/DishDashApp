@@ -83,4 +83,12 @@ public class IngredientService
             throw new ArgumentException();
         }
     }
+
+    public async Task<bool> NameExists(string name)
+    {
+        var existingIngred = await _context.Ingredient.FirstOrDefaultAsync(i => i.Name == name);
+        if (existingIngred == null)
+            return false;
+        return true;
+    }
 }

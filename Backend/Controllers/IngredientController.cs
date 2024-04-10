@@ -87,5 +87,11 @@ public class IngredientController : ControllerBase
             return NoContent();
         }
     }
+
+    [HttpGet("NameExists")]
+    public async Task<IActionResult> CheckNameExists(string name){
+        var exist =  await _service.NameExists(name);
+        return Ok(exist);
+    }
 }
 

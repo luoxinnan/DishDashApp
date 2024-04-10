@@ -31,7 +31,9 @@ export function App() {
   const [NoDishes, setNoDishes] = useState<Dish[]>(defaltNoDishes);
 
   async function addNewIngred(value: FieldValues) {
-    const newIngred: Ingred = { name: value.foodname, quantity: 1 }
+    const name = value.foodname;
+    
+    const newIngred: Ingred = { name: name, quantity: 1 }
     PostIngred(newIngred);
 
     const UpdatedIngreds = await GetIngreds();
