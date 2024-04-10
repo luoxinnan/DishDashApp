@@ -15,7 +15,7 @@ export default function IngredCards({ingreds }: Props){
   
 
     return (
-        <section>
+        <section className="mb-20 ">
           {updatedIngreds.map((ingred, index) => (
             <div className="ingred-container" key={index}>
               <h2 className="ingred-name">{ingred.name}</h2>

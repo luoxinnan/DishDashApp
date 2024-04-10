@@ -9,15 +9,10 @@ import NoDishCards from './components/NoDishCards';
 import YesDishCards from './components/YesDishCards';
 import { FieldValues } from 'react-hook-form';
 import { Dish, Ingred } from './components/appTypes';
-import { GetIngreds } from './services/ingredService';
+import { GetIngreds, PostIngred } from './services/ingredService';
 
 // --------temp------
 
-const defaultIngreds: Ingred[] = [
-  { name: "Tomato", quantity: 1 },
-  { name: "Egg", quantity: 4 },
-  { name: "Spring onion", quantity: 3 }
-];
 
 const d1 = { name: "Tomato fried egg", ingreds: [{ name: "Egg", quantity: 3 }, { name: "Tomato", quantity: 1 }] }
 const d2 = { name: "Egg soup", ingreds: [{ name: "Egg", quantity: 1 }] }
@@ -34,21 +29,13 @@ export function App() {
   const [allIngreds, setAllIngreds] = useState<Ingred[]>(seedIngreds);
   const [yesDishes, setYesDishes] = useState<Dish[]>(defaltYesDishes);
   const [NoDishes, setNoDishes] = useState<Dish[]>(defaltNoDishes);
-  // const [isIngredPage, setIsIngredpage] = useState<boolean>(false);
 
-
-
-  function addIngredToList(value: FieldValues) {
+  async function addNewIngred(value: FieldValues) {
     const newIngred: Ingred = { name: value.foodname, quantity: 1 }
-    const newAllIngreds = [...allIngreds, newIngred]
-    setAllIngreds(newAllIngreds);
-    console.table(allIngreds);
+    PostIngred(newIngred);
 
-    /* TODO:
-      - Send post reequest (name and quantity 0)
-      - Alert added
-      - setIngredList for update
-    */
+    const UpdatedIngreds = await GetIngreds();
+    setAllIngreds(UpdatedIngreds);
   }
 
   function addDish(dishName: string, ingreds: Ingred[]) {
@@ -89,7 +76,7 @@ export function App() {
       <Switch>
 
         <Route exact path="/">
-          <AddIngredForm func={addIngredToList} />
+          <AddIngredForm func={addNewIngred} />
           <IngredCards ingreds={allIngreds} />
         </Route>
 
