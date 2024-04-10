@@ -55,7 +55,7 @@ public class IngredientController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Ingredient>> PostIngredient(IngredientRequest request)
+    public async Task<ActionResult<IngredientResponse>> PostIngredient(IngredientRequest request)
     {
         try
         {

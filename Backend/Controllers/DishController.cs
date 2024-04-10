@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Backend.Models;
 using Backend.Services;
 using Backend.Dtos;
+using AutoMapper;
+using System.Drawing;
 
 namespace Backend.Controllers;
 
@@ -11,15 +13,17 @@ namespace Backend.Controllers;
 public class DishController : ControllerBase
 {
     private readonly DishService _service;
+    private readonly IMapper _mapper;
 
-    public DishController(DishService service)
+    public DishController(DishService service, IMapper mapper)
     {
         _service = service;
+        _mapper = mapper;
     }
 
     // GET: api/Dish
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Dish>>> GetDishes()
+    public async Task<ActionResult<IEnumerable<DishDto>>> GetDishes()
     {
         return await _service.GetAllDishes();
     }
@@ -31,6 +35,23 @@ public class DishController : ControllerBase
         if (response == null)
             return NotFound();
         return Ok(response);
+    }
+
+    
+    [HttpPost]
+    public async Task<ActionResult<DishDto>> PostIngredient(DishDto request)
+    {
+        try
+        {
+            var newDish = await _service.CreateDish(request);
+            var response = _mapper.Map<DishDto>(newDish);
+            return CreatedAtAction(nameof(GetIngredient), new { id = newDish.Id }, response);
+
+        }
+        catch (ArgumentException)
+        {
+            return BadRequest();
+        }
     }
 
     // DELETE: api/Dish/5
