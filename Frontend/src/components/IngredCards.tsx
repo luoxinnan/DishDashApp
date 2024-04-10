@@ -18,7 +18,7 @@ export default function IngredCards({ingreds, yesDishes, noDishes }: Props){
         await DeleteIngred(ingredToChange.name)
       }else{
         ingredToChange.quantity = newQuantity;
-        await PutIngred(ingredToChange);
+        await PutIngred(ingredToChange.name, ingredToChange.quantity);
       }
       setUpdatedIngreds(await GetIngreds());
       setNewYesDishes(await GetYesDishes());

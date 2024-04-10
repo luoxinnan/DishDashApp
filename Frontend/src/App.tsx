@@ -9,17 +9,9 @@ import NoDishCards from './components/NoDishCards';
 import YesDishCards from './components/YesDishCards';
 import { FieldValues } from 'react-hook-form';
 import { Dish, Ingred } from './appTypes';
-import { GetIngreds, PostIngred } from './services/ingredService';
+import { GetIngreds, PostIngred, PutIngred } from './services/ingredService';
 import {  GetDishes, GetNoDishes, GetYesDishes, PostDish } from './services/dishService';
 
-// // --------temp------
-
-// const d1 = { name: "Tomato fried egg", ingredsEnough: [{ name: "Egg", quantity: 3 }, { name: "Tomato", quantity: 1 }], ingredsNotEnough: [] }
-// const d2 = { name: "Egg soup", ingredsEnough: [{ name: "Egg", quantity: 1 }],  ingredsNotEnough: [] }
-// const d3 = { name: "Steak", ingredsEnough: [{ name: "Beef", quantity: 1 }], ingredsNotEnough: [] }
-// const defaultYesDishes = [d1, d2];
-// const defaultNoDishes = [d3];
-// //-----------------
 
 const seedIngreds = await GetIngreds();
 const seedYesDishes: Dish[] = await GetYesDishes();
@@ -56,18 +48,24 @@ useEffect(() => {
 
   }
 
-  function cookAndUpdate(i: number) {
+  async function cookAndUpdate(i: number) {
     const dish = yesDishes[i];
-    const newAllIngreds = [...allIngreds];
-    dish.ingredsEnough.forEach(dishIngred => {
+    let newAllIngreds = [...allIngreds];
+    dish.ingredsEnough.forEach(async dishIngred => {
       const ingredIndex = newAllIngreds.findIndex(ing => ing.name == dishIngred.name);
-      if (ingredIndex != -1)
-        newAllIngreds[ingredIndex].quantity -= dishIngred.quantity;
+      if (ingredIndex != -1){
+        const ingred = newAllIngreds[ingredIndex]
+        ingred.quantity -= dishIngred.quantity;
+        if(ingred.quantity == 0)
+          newAllIngreds  = newAllIngreds.filter(ing => ing.name != ingred.name);
+
+        await PutIngred(dishIngred.name, newAllIngreds[ingredIndex].quantity)
+      }
     });
 
     setAllIngreds(newAllIngreds);
-    // TODO: patch request
-    // TODO: check if the dish is still a yes dish, move it accordingly, and rerender the page
+    setYesDishes(await GetYesDishes());
+    setNoDishes(await GetNoDishes());
 
   }
 
@@ -95,8 +93,8 @@ useEffect(() => {
           <AddDishDetailForm func={addDish} />
         </Route>
 
-
       </Switch>
+
       <div style={{ display: 'flex', width: '80%', position: 'fixed', bottom: 0 }}>
         
       </div>
