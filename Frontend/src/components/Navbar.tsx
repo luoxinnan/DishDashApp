@@ -4,10 +4,7 @@ import "./styles/navbarStyles.css"
 
 
 
-export default function Navbar(){
-
-
-
+export default function Navbar() {
   const [activeButton, setActiveButton] = useState<string>("button1");
 
   const handleClick = (button: string) => {
@@ -30,7 +27,7 @@ export default function Navbar(){
         <span className='text-sm'>Dishes</span>
       </Link>
       <Link to="/shoplist" className={`text-sm ${activeButton === 'button3' ? 'clicked active' : ''}`} onClick={() => handleClick('button3')}>
-            <button>
+        <button>
           <i className="fa-solid fa-list-check text-2xl"></i>
         </button>
         <span className='text-sm'>Shop List</span>

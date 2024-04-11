@@ -1,5 +1,3 @@
-
-
 import { Dish } from '../appTypes';
 import DishCard from "./DishCard"
 
@@ -12,7 +10,6 @@ export default function NoDishCards({dishes, cookFunc, deleteFunc}: Props){
                 <DishCard dish={dish} i={i} cookFunc= {cookFunc} canCook={false} deleteFunc={deleteFunc}/>
                 
             ))}
-        
         </section>
     )
 }

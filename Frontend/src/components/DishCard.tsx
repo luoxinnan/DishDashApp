@@ -5,8 +5,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
-import { Button } from "@/components/ui/button"
-import { useEffect, useState } from "react";
+import {useState } from "react";
 
 
 
@@ -83,7 +82,6 @@ export default function DishCard({ dish, cookFunc, i, canCook, deleteFunc }: dis
                 )}
             </AccordionItem>
         </Accordion>
-
     )
 }
 

@@ -1,13 +1,12 @@
 
 import { BrowserRouter as Router, Route, Switch, Link, useHistory } from 'react-router-dom';
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { Ingred } from '../appTypes';
 
 
 type Props = {
     func: (dishName: string, ingreds: Ingred[]) => void;
 }
-
 
 
 export default function AddDishDetailForm({ func }: Props) {
@@ -64,12 +63,8 @@ export default function AddDishDetailForm({ func }: Props) {
                                     <input type="text" name="dish-ingredient-quantity" onChange={event => addQuantityToIngred(event.target.value, i)} className="input input-bordered w-full max-w-xs" />
                                 </div>
                             </div>
-
                         )
-
-
                     }
-
                 </section>
             </form>
             <br />
@@ -95,8 +90,6 @@ export default function AddDishDetailForm({ func }: Props) {
                 }
                 <p>---------------------------------</p>
             </div> */}
-
-
         </div>
     )
 }
