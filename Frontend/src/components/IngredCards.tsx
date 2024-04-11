@@ -27,6 +27,7 @@ export default function IngredCards({allIngreds, setAllIngreds,yesDishes, setYes
         <section className="mb-20 ">
           {allIngreds.map((ingred, index) => (
             <div className="ingred-container" key={index}>
+              <img src="https://pngfre.com/wp-content/uploads/tomato-78-1024x1024.png" alt="Tomato" className="size-11"/>
               <h2 className="ingred-name">{ingred.name}</h2>
               <Counter
                 value={ingred.quantity}
