@@ -1,17 +1,14 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Counter from "./Counter";
 import "./styles/ingredCardsStyles.css"
 import { Dish, Ingred } from '../appTypes';
 import { DeleteIngred, GetIngreds, PutIngred } from "@/services/ingredService";
 import { GetNoDishes, GetYesDishes } from "@/services/dishService";
 
-export default function IngredCards({ingreds, yesDishes, noDishes }: Props){
-    const [updatedIngreds, setUpdatedIngreds] = useState(ingreds);
-    const [NewYesDishes, setNewYesDishes] = useState<Dish[]>(yesDishes);
-    const [NewNoDishes, setNewNoDishes] = useState<Dish[]>(noDishes);
+export default function IngredCards({allIngreds, setAllIngreds,yesDishes, setYesDishes,noDishes, setNoDishes }: Props){
 
     async function handleQuantityChange (index: number, newQuantity: number) {
-      const newIngreds = [...updatedIngreds];
+      const newIngreds = [...allIngreds];
       const ingredToChange = newIngreds[index];
 
       if(newQuantity == 0){
@@ -20,15 +17,15 @@ export default function IngredCards({ingreds, yesDishes, noDishes }: Props){
         ingredToChange.quantity = newQuantity;
         await PutIngred(ingredToChange.name, ingredToChange.quantity);
       }
-      setUpdatedIngreds(await GetIngreds());
-      setNewYesDishes(await GetYesDishes());
-      setNewNoDishes(await GetNoDishes());
+      setAllIngreds(await GetIngreds());
+      setYesDishes(await GetYesDishes());
+      setNoDishes(await GetNoDishes());
     };
   
 
     return (
         <section className="mb-20 ">
-          {updatedIngreds.map((ingred, index) => (
+          {allIngreds.map((ingred, index) => (
             <div className="ingred-container" key={index}>
               <h2 className="ingred-name">{ingred.name}</h2>
               <Counter
@@ -47,7 +44,10 @@ export default function IngredCards({ingreds, yesDishes, noDishes }: Props){
 
 
 type Props = {
-    ingreds: Ingred[];
+    allIngreds: Ingred[];
+    setAllIngreds: Dispatch<SetStateAction<Ingred[]>>
     yesDishes: Dish[];
+    setYesDishes: Dispatch<SetStateAction<Dish[]>>
     noDishes: Dish[];
+    setNoDishes: Dispatch<SetStateAction<Dish[]>>
 }

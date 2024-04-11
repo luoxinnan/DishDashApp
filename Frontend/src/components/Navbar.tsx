@@ -8,7 +8,7 @@ export default function Navbar(){
 
 
 
-  const [activeButton, setActiveButton] = useState<string | null>(null);
+  const [activeButton, setActiveButton] = useState<string>("button1");
 
   const handleClick = (button: string) => {
     setActiveButton(button);

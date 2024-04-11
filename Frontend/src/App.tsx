@@ -26,8 +26,7 @@ export function App() {
   const [yesDishes, setYesDishes] = useState<Dish[]>(seedYesDishes);
   const [noDishes, setNoDishes] = useState<Dish[]>(seedNoDishes);
 
-useEffect(() => {
-  }, []); 
+
 
   async function addNewIngred(value: FieldValues) {
     const name = value.foodname;
@@ -93,7 +92,11 @@ useEffect(() => {
 
         <Route exact path="/">
           <AddIngredForm func={addNewIngred} />
-          <IngredCards ingreds={allIngreds} yesDishes={yesDishes} noDishes={noDishes} />
+          <IngredCards 
+            allIngreds={allIngreds} setAllIngreds={setAllIngreds} 
+            yesDishes={yesDishes} setYesDishes={setYesDishes} 
+            noDishes={noDishes} setNoDishes={setNoDishes}
+          />
         </Route>
 
         <Route exact path="/dishes">
