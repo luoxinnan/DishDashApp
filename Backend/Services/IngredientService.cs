@@ -9,9 +9,9 @@ public class IngredientService
 {
 
     private readonly FoodDBContext _context;
-        private readonly IMapper _mapper;
+    private readonly IMapper _mapper;
 
-    public IngredientService(FoodDBContext context , IMapper mapper)
+    public IngredientService(FoodDBContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
@@ -19,9 +19,9 @@ public class IngredientService
 
     public async Task<List<IngredientResponse>> GetAllIngreds()
     {
-        var ingreds =  await _context.Ingredient
+        var ingreds = await _context.Ingredient
             .ToListAsync();
-        return  ingreds.Select(ing => _mapper.Map<IngredientResponse>(ing)).ToList();
+        return ingreds.Select(ing => _mapper.Map<IngredientResponse>(ing)).ToList();
 
     }
     public async Task<IngredientResponse> GetIngredientById(int id)
@@ -38,8 +38,14 @@ public class IngredientService
         {
             throw new ArgumentException("yo this ingredient does not exist");
         }
-        existingIngred.Name = dto.Name;
+
         existingIngred.Quantity = dto.Quantity;
+
+        if (dto.Quantity == 0) 
+        {
+            _context.Ingredient.Remove(existingIngred);
+        }
+
         try
         {
             await _context.SaveChangesAsync();
@@ -52,7 +58,7 @@ public class IngredientService
 
     public async Task<Ingredient> CreateIngredient(IngredientRequest request)
     {
-        if(_context.Ingredient == null)
+        if (_context.Ingredient == null)
             throw new ArgumentNullException("Table not exist!");
 
         var newIngred = _mapper.Map<Ingredient>(request);
@@ -61,7 +67,7 @@ public class IngredientService
         return newIngred;
     }
 
-    
+
 
     public async Task DeleteIngredientByName(string name)
     {
