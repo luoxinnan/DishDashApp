@@ -29,12 +29,14 @@ export default function Navbar(){
         </button>
         <span className='text-sm'>Dishes</span>
       </Link>
-      <div className={`text-sm ${activeButton === 'button3' ? 'clicked active' : ''}`} onClick={() => handleClick('button3')}>
-        <button>
-          <i className="fa-solid fa-gear text-2xl"></i>
+      <Link to="/shoplist" className={`text-sm ${activeButton === 'button3' ? 'clicked active' : ''}`} onClick={() => handleClick('button3')}>
+            <button>
+          <i className="fa-solid fa-list-check text-2xl"></i>
         </button>
-        <span className='text-sm'>Settings</span>
-      </div>
+        <span className='text-sm'>Shop List</span>
+      </Link>
+
+
     </div>
   );
 }

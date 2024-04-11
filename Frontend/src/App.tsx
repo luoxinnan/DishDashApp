@@ -12,6 +12,7 @@ import { Dish, Ingred } from './appTypes';
 import { GetIngreds, PostIngred, PutIngred } from './services/ingredService';
 import {  GetDishes, GetNoDishes, GetYesDishes, PostDish, deleteDish } from './services/dishService';
 import Navbar from './components/Navbar';
+import ShopList from './components/ShopList';
 
 
 const seedIngreds = await GetIngreds();
@@ -108,6 +109,10 @@ useEffect(() => {
 
         <Route exact path="/dishes/add-dish">
           <AddDishDetailForm func={addDish} />
+        </Route>
+
+        <Route exact path="/shoplist">
+          <ShopList />
         </Route>
 
       </Switch>

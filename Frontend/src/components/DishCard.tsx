@@ -10,7 +10,7 @@ import { useState } from "react";
 
 
 
-export default function DishCard({ dish, cookFunc, i, canCook, deleteFunc}: dishCardProps) {
+export default function DishCard({ dish, cookFunc, i, canCook, deleteFunc }: dishCardProps) {
     const [cookedAlert, setCookedAlert] = useState<boolean>(false);
     // const [deletedAlert, setDeletedAlert] = useState<boolean>(false);
 
@@ -35,7 +35,13 @@ export default function DishCard({ dish, cookFunc, i, canCook, deleteFunc}: dish
                     <AccordionContent>{ingred.name}: {ingred.quantity}</AccordionContent>
                 ))}
                 {dish.ingredsNotEnough.map(ingred => (
-                    <AccordionContent style={{ color: 'rgb(173, 196, 206)' }}>{ingred.name}: {ingred.quantity}</AccordionContent>
+                    <AccordionContent style={{ color: 'rgb(173, 196, 206)' }}>
+                        {ingred.name}: {ingred.quantity}
+                        <a>
+                            <button className="btn btn-xs btn-outline btn-primary flex-1 ml-3">+</button>
+                        </a>
+                    </AccordionContent>
+
                 ))}
                 {canCook ? (
                     <>
@@ -69,7 +75,7 @@ export default function DishCard({ dish, cookFunc, i, canCook, deleteFunc}: dish
                 )} */}
             </AccordionItem>
         </Accordion>
-        
+
     )
 }
 

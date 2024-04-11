@@ -50,7 +50,7 @@ export default function AddDishDetailForm({ func }: Props) {
                     <input type="text" name="dishName" placeholder="Type here" onChange={event => changeDishName(event.target.value)} className="input input-bordered w-full max-w-xs" />
                 </div>
                 <label>Ingredients </label>
-                <button className='btn btn-primary btn-sm ml-3' type="button" onClick={addIngredForm}> + </button>
+                <button className='btn btn-primary btn-sm ml-3 w-30' type="button" onClick={addIngredForm}> + </button>
                 <section className="ingred-form">
                     {
                         ingredForms.map((ingred, i) =>
