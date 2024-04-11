@@ -4,7 +4,6 @@ import App from './App.tsx'
 import "./global.css"
 import './styles.css'
 // import '@picocss/pico'
-// import './output.css'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
