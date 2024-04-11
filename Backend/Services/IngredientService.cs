@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 
 public class IngredientService
 {
-
     private readonly FoodDBContext _context;
     private readonly IMapper _mapper;
 
@@ -41,7 +40,7 @@ public class IngredientService
 
         existingIngred.Quantity = dto.Quantity;
 
-        if (dto.Quantity == 0) 
+        if (dto.Quantity == 0)
         {
             _context.Ingredient.Remove(existingIngred);
         }

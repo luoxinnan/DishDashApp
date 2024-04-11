@@ -1,11 +1,7 @@
 
-
-
-using Backend.Models;
 using Backend.Services;
 using JokesAPI.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,11 +19,12 @@ builder.Services.AddCors();
 builder.Services.AddScoped<DishService>();
 builder.Services.AddScoped<IngredientService>();
 builder.Services.AddScoped<DishIngredientService>();
-builder.Services.AddAutoMapper(typeof(AutomapperConfig)); 
+builder.Services.AddAutoMapper(typeof(AutomapperConfig));
 
 
 var app = builder.Build();
-using(var scope = app.Services.CreateScope()){
+using (var scope = app.Services.CreateScope())
+{
     var services = scope.ServiceProvider;
     SeedData.Initialize(services);
 }

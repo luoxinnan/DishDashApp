@@ -1,13 +1,10 @@
 
 using Microsoft.AspNetCore.Mvc;
-using Backend.Models;
 using Backend.Services;
 using Backend.Dtos;
 using AutoMapper;
-using System.Drawing;
 
 namespace Backend.Controllers;
-using Microsoft.EntityFrameworkCore;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -15,13 +12,11 @@ public class DishController : ControllerBase
 {
     private readonly DishService _service;
     private readonly IMapper _mapper;
-    private readonly FoodDBContext _context;
 
-    public DishController(DishService service, FoodDBContext context, IMapper mapper)
+    public DishController(DishService service, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;
-        _context = context;
     }
     [HttpGet]
     public async Task<ActionResult<IEnumerable<object>>> GetDishes()
@@ -37,7 +32,7 @@ public class DishController : ControllerBase
         return await _service.GetAllDisesName();
     }
 
- 
+
 
 
     [HttpGet("{name}")]

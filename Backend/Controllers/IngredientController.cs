@@ -1,7 +1,6 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Backend.Models;
 using Backend.Services;
 using Backend.Dtos;
 using AutoMapper;
@@ -89,8 +88,9 @@ public class IngredientController : ControllerBase
     }
 
     [HttpGet("NameExists")]
-    public async Task<IActionResult> CheckNameExists(string name){
-        var exist =  await _service.NameExists(name);
+    public async Task<IActionResult> CheckNameExists(string name)
+    {
+        var exist = await _service.NameExists(name);
         return Ok(exist);
     }
 }
