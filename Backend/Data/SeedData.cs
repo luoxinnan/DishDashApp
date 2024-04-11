@@ -52,14 +52,14 @@ public static class SeedData
     {
         var ingredients = new List<Ingredient>
         {
-            new Ingredient { Name = "Tomato", Quantity = 8 },
-            new Ingredient { Name = "Egg", Quantity = 2 },
-            new Ingredient { Name = "Spaghetti", Quantity = 5 },
-            new Ingredient { Name = "Bacon", Quantity = 2 },
-            new Ingredient { Name = "Chicken", Quantity = 5 },
-            new Ingredient { Name = "Bell pepper", Quantity = 1 },
-            new Ingredient { Name = "Onion", Quantity = 10 },
-            new Ingredient { Name = "Ginger", Quantity = 2 }
+            new Ingredient { Name = "Tomato", Quantity = 5, ImgAddress="https://cdn-icons-png.flaticon.com/512/2909/2909894.png" },
+            new Ingredient { Name = "Egg", Quantity = 12, ImgAddress="https://cdn-icons-png.freepik.com/256/2437/2437740.png" },
+            new Ingredient { Name = "Spaghetti", Quantity = 2, ImgAddress="https://cdn-icons-png.flaticon.com/512/2836/2836660.png" },
+            new Ingredient { Name = "Bacon", Quantity = 2, ImgAddress="https://cdn-icons-png.flaticon.com/512/1857/1857921.png" },
+            new Ingredient { Name = "Chicken", Quantity = 3, ImgAddress="https://cdn-icons-png.flaticon.com/512/821/821023.png" },
+            new Ingredient { Name = "Garlic", Quantity = 1, ImgAddress="https://cdn-icons-png.flaticon.com/512/6108/6108170.png" },
+            new Ingredient { Name = "Onion", Quantity = 8, ImgAddress="https://cdn-icons-png.flaticon.com/512/184/184506.png" },
+            new Ingredient { Name = "Ginger", Quantity = 2, ImgAddress="https://cdn-icons-png.flaticon.com/512/1593/1593696.png" }
             // Add more ingredients as needed
         };
 
@@ -82,7 +82,7 @@ private static void SeedDishIngredients(FoodDBContext context)
 
         // Chicken Stir Fry
         new DishIngredient { DishName = "Chicken Stir Fry", IngredientName = "Chicken", Quantity = 2 },
-        new DishIngredient { DishName = "Chicken Stir Fry", IngredientName = "Spaghetti", Quantity = 1 },
+        new DishIngredient { DishName = "Chicken Stir Fry", IngredientName = "Chili", Quantity = 1 },
         new DishIngredient { DishName = "Chicken Stir Fry", IngredientName = "Onion", Quantity = 1 },
 
         // Chicken Soup (using common ingredients)

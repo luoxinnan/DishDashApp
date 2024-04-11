@@ -74,7 +74,7 @@ export default function AddDishDetailForm({ func }: Props) {
             </form>
             <br />
 
-            <Link to="/dishes"><button className='btn btn-neutral btn-sm mr-2 w-20'>Cancel</button></Link>
+            <Link to="/dishes"><button className='btn btn-neutral btn-sm mr-2 w-20'>&larr;  Back</button></Link>
             {/* <button type="submit" onClick={()=> func(dishName, ingredForms)}>Confirm</button> */}
             <button type="submit" onClick={handleConfirm} className='btn btn-neutral btn-sm mr-2 w-20'> Confirm</button>
             {showAlert && (

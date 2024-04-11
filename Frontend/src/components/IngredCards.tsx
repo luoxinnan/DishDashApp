@@ -5,6 +5,7 @@ import { Dish, Ingred } from '../appTypes';
 import { DeleteIngred, GetIngreds, PutIngred } from "@/services/ingredService";
 import { GetNoDishes, GetYesDishes } from "@/services/dishService";
 
+
 export default function IngredCards({allIngreds, setAllIngreds,yesDishes, setYesDishes,noDishes, setNoDishes }: Props){
 
     async function handleQuantityChange (index: number, newQuantity: number) {
@@ -27,7 +28,7 @@ export default function IngredCards({allIngreds, setAllIngreds,yesDishes, setYes
         <section className="mb-20 ">
           {allIngreds.map((ingred, index) => (
             <div className="ingred-container" key={index}>
-              <img src="https://pngfre.com/wp-content/uploads/tomato-78-1024x1024.png" alt="Tomato" className="size-11"/>
+              <img src={ingred.imgAddress} alt="Tomato" className="size-8 mr-1"/>
               <h2 className="ingred-name">{ingred.name}</h2>
               <Counter
                 value={ingred.quantity}
