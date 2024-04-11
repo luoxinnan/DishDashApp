@@ -2,6 +2,7 @@
 import { useForm, FieldValues } from "react-hook-form";
 import "./styles/addIngredFormStyles.css"
 import { useState } from "react";
+import { NameExists } from "@/services/ingredService";// Import the function to check if ingredient exists from IngredService
 
 
 export default function AddIngredForm({ func }: Props) {
@@ -9,10 +10,10 @@ export default function AddIngredForm({ func }: Props) {
     const [showGoodAlert, setShowGoodAlert] = useState<boolean>(false);
     const [showExistAlert, setShowExistAlert] = useState<boolean>(false);
 
+
     async function handleConfirm(data: FieldValues) {
-        const response = await fetch(`http://localhost:5279/api/Ingredient/NameExists?name=${data.foodname}`);
-        if (response.ok) {
-            const exists = await response.json();
+        try {
+            const exists = await NameExists(data.foodname); 
             if (exists) {
                 setShowExistAlert(true);
                 setTimeout(() => setShowExistAlert(false), 1000);
@@ -21,7 +22,7 @@ export default function AddIngredForm({ func }: Props) {
                 setShowGoodAlert(true);
                 setTimeout(() => setShowGoodAlert(false), 1000);
             }
-        } else {
+        } catch (error) {
             console.error("Failed to check if foodname exists");
         }
     }

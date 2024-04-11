@@ -43,3 +43,11 @@ export async function DeleteIngred(name: string){
       }
     
 }
+
+export async function NameExists(name: string){
+    const response = await fetch(`http://localhost:5279/api/Ingredient/NameExists?name=${name}`);
+    if (!response.ok) {
+        throw new Error('Failed to delete customer');
+    }
+    return await response.json();
+}
