@@ -27,54 +27,9 @@ namespace Backend.Controllers
         {
             return await _context.DishIngredient.ToListAsync();
         }
-
-        // GET: api/DishIngredient/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<DishIngredient>> GetDishIngredient(int id)
-        {
-            var dishIngredient = await _context.DishIngredient.FindAsync(id);
-
-            if (dishIngredient == null)
-            {
-                return NotFound();
-            }
-
-            return dishIngredient;
-        }
-
-        // PUT: api/DishIngredient/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutDishIngredient(int id, DishIngredient dishIngredient)
-        {
-            if (id != dishIngredient.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(dishIngredient).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DishIngredientExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
+  
 
         // POST: api/DishIngredient
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<DishIngredient>> PostDishIngredient(DishIngredient dishIngredient)
         {
@@ -84,7 +39,6 @@ namespace Backend.Controllers
             return CreatedAtAction("GetDishIngredient", new { id = dishIngredient.Id }, dishIngredient);
         }
 
-        // DELETE: api/DishIngredient/5
         [HttpDelete("{name}")]
         public async Task<IActionResult> DeleteDishIngredient(string name)
         {
