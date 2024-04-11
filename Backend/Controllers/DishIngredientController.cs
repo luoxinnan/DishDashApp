@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Backend.Models;
-using Microsoft.JSInterop.Infrastructure;
+using Backend.Services;
+using Backend.Dtos;
 
 namespace Backend.Controllers
 {
@@ -14,51 +8,37 @@ namespace Backend.Controllers
     [ApiController]
     public class DishIngredientController : ControllerBase
     {
-        private readonly FoodDBContext _context;
+        private readonly DishIngredientService _service;
 
-        public DishIngredientController(FoodDBContext context)
+        public DishIngredientController(DishIngredientService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: api/DishIngredient
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DishIngredient>>> GetDishIngredient()
+        public async Task<ActionResult<IEnumerable<DishIngredientDto>>> GetDishIngredients()
         {
-            return await _context.DishIngredient.ToListAsync();
+            return await _service.GetAllDishIngredients();
         }
-  
 
         // POST: api/DishIngredient
         [HttpPost]
-        public async Task<ActionResult<DishIngredient>> PostDishIngredient(DishIngredient dishIngredient)
+        public async Task<ActionResult<DishIngredientDto>> PostDishIngredient(DishIngredientDto dishIngredient)
         {
-            _context.DishIngredient.Add(dishIngredient);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetDishIngredient", new { id = dishIngredient.Id }, dishIngredient);
+            var newDishIngredient = await _service.CreateDishIngredient(dishIngredient);
+            return CreatedAtAction(nameof(PostDishIngredient), new { name = newDishIngredient.DishName }, newDishIngredient);
         }
 
+        // DELETE: api/DishIngredient/name
         [HttpDelete("{name}")]
         public async Task<IActionResult> DeleteDishIngredient(string name)
         {
-            var allDishIngreds = await _context.DishIngredient.ToListAsync();
-            if (allDishIngreds == null)
+            var result = await _service.DeleteDishIngredientsByName(name);
+            if (result)
+                return Ok();
+            else
                 return NotFound();
-            
-            var dishIngreds = allDishIngreds.Where(d => d.DishName == name);
-            foreach(var di in dishIngreds)
-            {
-                _context.DishIngredient.Remove(di);
-                await _context.SaveChangesAsync();
-            }
-
-            return Ok();
-        }
-
-        private bool DishIngredientExists(int id)
-        {
-            return _context.DishIngredient.Any(e => e.Id == id);
         }
     }
 }
