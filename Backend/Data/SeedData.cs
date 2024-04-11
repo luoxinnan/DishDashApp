@@ -53,7 +53,7 @@ public static class SeedData
         var ingredients = new List<Ingredient>
         {
             new Ingredient { Name = "Tomato", Quantity = 5, ImgAddress="https://cdn-icons-png.flaticon.com/512/2909/2909894.png" },
-            new Ingredient { Name = "Egg", Quantity = 12, ImgAddress="https://cdn-icons-png.freepik.com/256/2437/2437740.png" },
+            new Ingredient { Name = "Egg", Quantity = 9, ImgAddress="https://cdn-icons-png.freepik.com/256/2437/2437740.png" },
             new Ingredient { Name = "Spaghetti", Quantity = 2, ImgAddress="https://cdn-icons-png.flaticon.com/512/2836/2836660.png" },
             new Ingredient { Name = "Bacon", Quantity = 2, ImgAddress="https://cdn-icons-png.flaticon.com/512/1857/1857921.png" },
             new Ingredient { Name = "Chicken", Quantity = 3, ImgAddress="https://cdn-icons-png.flaticon.com/512/821/821023.png" },
