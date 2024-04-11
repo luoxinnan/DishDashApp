@@ -69,6 +69,7 @@ export default function DishCard({ dish, cookFunc, i, canCook, deleteFunc}: dish
                 )} */}
             </AccordionItem>
         </Accordion>
+        
     )
 }
 

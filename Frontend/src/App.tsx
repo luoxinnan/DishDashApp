@@ -97,7 +97,11 @@ useEffect(() => {
         <Route exact path="/dishes">
           <YesDishCards dishes={yesDishes} cookFunc={cookAndUpdate} deleteFunc={deleteDishFromYesDishs} />
           <NoDishCards dishes={noDishes} cookFunc={cookAndUpdate} deleteFunc={deleteDishFromNoDishs}/>
-          <Link to="/dishes/add-dish"><button className="btn btn-primary float-right mt-10 absolute bottom-0 right-0 mb-20 mr-10">+</button></Link>
+          <Link to="/dishes/add-dish">
+          <div className="tooltip float-right mt-10 absolute bottom-0 right-0 mb-20 mr-10" data-tip="Add a new dish">
+            <button className="btn btn-primary ">+</button>
+          </div>
+            </Link>
         </Route>
 
 

@@ -54,7 +54,9 @@ export default function AddIngredForm({ func }: Props) {
                 <div className="add-ingred">
                     {/* <Input className="add-ingred-input"{...register("foodname", { required: "You forgot to give it a name" })} placeholder="ingredient" /> */}
                     <input type="text" {...register("foodname", { required: "You forgot to give it a name" })} placeholder="Ingredient name" className="add-ingred-input input input-bordered w-full max-w-xs" />
-                    <button type="submit" className="btn btn-primary">Add</button>
+                    <div className="tooltip" data-tip="Add a new ingredient">
+                        <button type="submit" className="btn btn-primary">Add</button>
+                    </div>
                 </div>
             </form>
         </>
