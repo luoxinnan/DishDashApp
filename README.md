@@ -4,7 +4,7 @@ Have you ever opened the fridge stocked with all the food ingredients but had no
 
 ## Project Origin
 
-This project was developed as a personal project during a coding bootcamp at &lt;/SALT&gt;, built entirely from scratch without external assistance, and completed within just 3 days.
+This full-stack project was developed as a personal project during a coding bootcamp at &lt;/SALT&gt;, built entirely from scratch without external assistance, and completed within just 3 days.
 
 
 ## Video Demo 
