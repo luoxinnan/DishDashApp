@@ -22,7 +22,7 @@ export default function DishCard({ dish, cookFunc, i, canCook, deleteFunc }: dis
 
     async function handleClickDelete(i: number) {
         setDeletedAlert(true);
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        await new Promise(resolve => setTimeout(resolve, 2000));
         setDeletedAlert(false)
         await deleteFunc(i);
     }

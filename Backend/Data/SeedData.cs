@@ -52,7 +52,7 @@ public static class SeedData
     {
         var ingredients = new List<Ingredient>
         {
-            new Ingredient { Name = "Tomato", Quantity = 5, ImgAddress="https://cdn-icons-png.flaticon.com/512/2909/2909894.png" },
+            new Ingredient { Name = "Tomato", Quantity = 6, ImgAddress="https://cdn-icons-png.flaticon.com/512/2909/2909894.png" },
             new Ingredient { Name = "Egg", Quantity = 9, ImgAddress="https://cdn-icons-png.freepik.com/256/2437/2437740.png" },
             new Ingredient { Name = "Spaghetti", Quantity = 2, ImgAddress="https://cdn-icons-png.flaticon.com/512/2836/2836660.png" },
             new Ingredient { Name = "Bacon", Quantity = 2, ImgAddress="https://cdn-icons-png.flaticon.com/512/1857/1857921.png" },
@@ -82,7 +82,7 @@ private static void SeedDishIngredients(FoodDBContext context)
 
         // Chicken Stir Fry
         new DishIngredient { DishName = "Chicken Stir Fry", IngredientName = "Chicken", Quantity = 2 },
-        new DishIngredient { DishName = "Chicken Stir Fry", IngredientName = "Chili", Quantity = 1 },
+        new DishIngredient { DishName = "Chicken Stir Fry", IngredientName = "Chilli", Quantity = 1 },
         new DishIngredient { DishName = "Chicken Stir Fry", IngredientName = "Onion", Quantity = 1 },
 
         // Chicken Soup (using common ingredients)
